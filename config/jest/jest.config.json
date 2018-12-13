@@ -9,9 +9,7 @@
   ],
   "cacheDirectory": "<rootDir>/.cache",
   "collectCoverageFrom": [
-    "<rootDir>/src/**/*.js",
-    "!<rootDir>/src/**/*.d.ts",
-    "!<rootDir>/src/__benchmarks__/**/*.js"
+    "<rootDir>/src/**/*.js"
   ],
   "testURL": "http://localhost",
   "testMatch": [
