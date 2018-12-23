@@ -69,18 +69,17 @@ const pluginConfig = (env) => [
       ? CONFIG.BASE_DEV
       : CONFIG.BASE_PROD,
   }),
-  // todo: edit this based on project structure
-  // new CopyWebpackPlugin([
+  new CopyWebpackPlugin([
   //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
-  // ]),
+  ]),
 ];
 
 const resolveConfig = (env) => ({
 
 });
 
-module.exports = (env) => ({
-  loaders: loaderConfig(env),
-  plugins: pluginConfig(env),
-  resolve: resolveConfig(env),
-});
+module.exports = {
+  loaders: (env) => loaderConfig(env),
+  plugins: (env) => pluginConfig(env),
+  resolve: (env) => resolveConfig(env),
+};
