@@ -11,6 +11,9 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const paths = require('./paths');
 const CONFIG = require('../config');
 
+/**
+ * loaders
+ */
 const loaderConfig = (env) => {
   const prodMode = env.NODE_ENV === 'production';
   return [
@@ -82,6 +85,9 @@ const loaderConfig = (env) => {
   ];
 };
 
+/**
+ * plugins
+ */
 const pluginConfig = (env) => {
   const prodMode = env.NODE_ENV === 'production';
   return [
@@ -131,6 +137,9 @@ const pluginConfig = (env) => {
   ].filter(Boolean);
 };
 
+/**
+ * resolve
+ */
 const resolveConfig = (env) => ({
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
   symlinks: false,

@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.NODE_ENV=development --env.SERVER_ENV=local --config ./config/webpack/webpack.dev.js",
-    "build": "npm run clean & npm run test & npm run build:only",
+    "build": "run-s clean test build:only",
     "build:only": "webpack --env.NODE_ENV=production --config ./config/webpack/webpack.prod.js",
     "build:analysis": "webpack --env.NODE_ENV=production --env.analysis --config ./config/webpack/webpack.prod.js",
     "test": "jest --config config/jest/jest.config.json --changedSince=master",
@@ -14,10 +14,10 @@
     "test:e2e:app": "start-server-and-test start http://localhost:3000 cypress",
     "test:e2e:gui": "cypress open",
     "cypress": "cypress run",
-    "clean": "npm-run-all -p clean:*",
-    "clean:cache": "rimraf /.cache",
-    "clean:build": "rimraf /build",
-    "clean:test": "rimraf /coverage"
+    "clean": "run-p clean:*",
+    "clean:cache": "rimraf .cache",
+    "clean:build": "rimraf dist",
+    "clean:test": "rimraf coverage"
   },
   "husky": {
     "hooks": {
