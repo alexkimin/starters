@@ -4,12 +4,10 @@ const IP = require('ip');
 const chalk = require('chalk');
 // internal
 const paths = require('./paths');
-const common = require('./webpack.config.common');
+const common = require('./webpack.common');
 const devServer = require('./devServer');
 const CONFIG = require('../config');
 // plugins
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -22,23 +20,6 @@ const prodLoaderConfig = (e) => [
 
 const prodPluginConfig = (e) => [
   ...common.plugins(e),
-  new CleanWebpackPlugin('dist', {
-    root: process.cwd(),
-  }),
-  new HtmlWebpackPlugin({
-    // todo
-    template: './src/index.html',
-    filename: paths.html,
-    minify: {
-      caseSensitive: true,
-      collapseWhitespace: true,
-      collapseInlineTagWhitespace: true,
-      keepClosingSlash: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      preserveLineBreaks: true,
-    },
-  }),
   new webpack.HashedModuleIdsPlugin(),
   new DuplicatePackageCheckerPlugin(),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -71,7 +52,7 @@ module.exports = (env) => ({
   },
   plugins: prodPluginConfig(env),
   resolve: {
-    ...commons.resolve(env),
+    ...common.resolve(env),
   },
   stats: {
     colors: true,
@@ -96,7 +77,7 @@ module.exports = (env) => ({
           },
           output: {
             comments: true,
-          }
+          },
           safari10: true,
           ie8: true,
         },

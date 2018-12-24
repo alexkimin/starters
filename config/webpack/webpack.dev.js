@@ -4,11 +4,11 @@ const IP = require('ip');
 const chalk = require('chalk');
 // internal
 const paths = require('./paths');
-const common = require('./webpack.config.common');
+const common = require('./webpack.common');
 const devServer = require('./devServer');
 const CONFIG = require('../config');
+const PORT = CONFIG.DEV_SERVER_PORT;
 // plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
@@ -30,17 +30,12 @@ const devPluginConfig = (e) => [
       return `${e.NODE_ENV}.${e.SERVER_ENV}.${hash}`;
     },
   }),
-  new HtmlWebpackPlugin({
-    // todo
-    template: './src/index.html',
-    filename: paths.html,
-  }),
   new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
       messages: [
-        '${chalk.inverse(' App is running: ')}\n' +
-        `    [INTERNAL] : http://localhost:${e.DEV_SERVER_PORT}\n    [EXTERNAL] : http://${IP.address()}:${e.DEV_SERVER_PORT}` +
-        `    [ENV]: ${e.NODE_ENV}, [SERVER ENV]: ${e.SERVER_ENV}\n`
+        `${chalk.inverse(' App is running: ')}\n\n` +
+        `    [INTERNAL]: http://localhost:${PORT}\n    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
+        `    [NODE_ENV]: ${e.NODE_ENV}, [API_SERVER]: ${e.SERVER_ENV}\n`
       ],
     },
   }),
@@ -53,7 +48,7 @@ module.exports = (env) => ({
   devtool: 'cheap-module-eval-source-map',
   // todo
   entry: {
-    app: ['@babel/polyfill', path.resolve(process.cwd(), 'src/index.tsx')],
+    app: ['@babel/polyfill', paths.entry],
   },
   // todo
   output: {
@@ -67,7 +62,7 @@ module.exports = (env) => ({
   },
   plugins: devPluginConfig(env),
   resolve: {
-    ...commons.resolve(env),
+    ...common.resolve(env),
   },
-  devServer: devServer(envs),
+  devServer: devServer(env),
 });

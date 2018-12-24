@@ -3,8 +3,10 @@ const webpack = require('webpack');
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 // internal
+const paths = require('./paths');
 const CONFIG = require('../config');
 
 const loaderConfig = (env) => [
@@ -53,29 +55,47 @@ const loaderConfig = (env) => [
   },
 ];
 
-const pluginConfig = (env) => [
-  new SimpleProgressPlugin(),
-  new ErrorOverlayPlugin(),
-  new webpack.ProvidePlugin({
-    // add global module if necessary
-  }),
-  new webpack.EnvironmentPlugin({
-    NODE_ENV: env.NODE_ENV || process.env.NODE_ENV,
-    BASE_DEV: CONFIG.BASE_DEV,
-    BASE_PROD: CONFIG.BASE_PROD,
-  }),
-  new BaseHrefWebpackPlugin({
-    baseHref: env.NODE_ENV === 'production'
-      ? CONFIG.BASE_DEV
-      : CONFIG.BASE_PROD,
-  }),
-  new CopyWebpackPlugin([
-  //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
-  ]),
-];
+const pluginConfig = (env) => {
+  const isProd = env.NODE_ENV === 'production';
+  return [
+    new SimpleProgressPlugin(),
+    new ErrorOverlayPlugin(),
+    new webpack.ProvidePlugin({
+      // add global module if necessary
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: env.NODE_ENV || process.env.NODE_ENV,
+      BASE_DEV: CONFIG.BASE_DEV,
+      BASE_PROD: CONFIG.BASE_PROD,
+    }),
+    new CopyWebpackPlugin([
+    //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
+    ]),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: paths.html,
+      minify: {
+        caseSensitive: isProd,
+        collapseWhitespace: isProd,
+        collapseInlineTagWhitespace: isProd,
+        keepClosingSlash: isProd,
+        removeComments: isProd,
+        removeRedundantAttributes: isProd,
+        preserveLineBreaks: isProd,
+      },
+    }),
+    new BaseHrefWebpackPlugin({
+      baseHref: isProd
+        ? CONFIG.BASE_DEV
+        : CONFIG.BASE_PROD,
+    }),
+  ];
+};
 
 const resolveConfig = (env) => ({
-
+  extensions: ['.js', '.jsx'],
+  symlinks: false,
+  alias: {},
 });
 
 module.exports = {
