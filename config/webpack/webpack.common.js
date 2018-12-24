@@ -16,10 +16,11 @@ const CONFIG = require('../config');
  */
 const loaderConfig = (env) => {
   const prodMode = env.NODE_ENV === 'production';
+  const scriptRegex = /\.(js|jsx)$/;
   return [
     // todo: lint setup required
     {
-      test: /\.(js|jsx|ts|tsx)$/,
+      test: scriptRegex,
       exclude: /node_modules/,
       use: [
         'thread-loader',
