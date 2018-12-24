@@ -34,8 +34,10 @@ const devPluginConfig = (e) => [
     compilationSuccessInfo: {
       messages: [
         `${chalk.inverse(' App is running: ')}\n\n` +
-        `    [INTERNAL]: http://localhost:${PORT}\n    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
-        `    [NODE_ENV]: ${e.NODE_ENV}, [API_SERVER]: ${e.SERVER_ENV}\n`
+        `    [INTERNAL]: http://localhost:${PORT}\n` +
+        `    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
+        `    [NODE_ENV]: ${e.NODE_ENV}\n` +
+        `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`
       ],
     },
   }),
@@ -46,18 +48,18 @@ const devPluginConfig = (e) => [
 module.exports = (env) => ({
   mode: env.NODE_ENV,
   devtool: 'cheap-module-eval-source-map',
-  // todo
   entry: {
     app: ['@babel/polyfill', paths.entry],
   },
-  // todo
   output: {
     path: paths.dist,
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
-    publicPath: '/',
+    publicPath: paths.devBase,
+    pathinfo: true,
   },
   module: {
+    ...common.rules,
     rules: devLoaderConfig(env),
   },
   plugins: devPluginConfig(env),

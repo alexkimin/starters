@@ -10,7 +10,7 @@ const CONFIG = require('../config');
 // plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -35,6 +35,7 @@ const prodPluginConfig = (e) => [
 
 module.exports = (env) => ({
   mode: env.NODE_ENV,
+  bail: true,
   devtool: false,
   // todo
   entry: {
@@ -45,9 +46,11 @@ module.exports = (env) => ({
     path: paths.dist,
     filename: '[name].[hash].js',
     chunkFilename: '[name].[chunkhash].bundle.js',
-    publicPath: '/',
+    publicPath: paths.prodBase,
+    pathinfo: false,
   },
   module: {
+    ...common.moduleOptions,
     rules: prodLoaderConfig(env),
   },
   plugins: prodPluginConfig(env),
@@ -66,35 +69,39 @@ module.exports = (env) => ({
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        exclude: [/\.min\.js$/gi],
-        parallel: true,
-        uglifyOptions: {
-          ecma: 5,
+      new TerserPlugin({
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
           compress: {
+            ecma: 5,
             warnings: false,
-            drop_console: true,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
           },
           output: {
-            comments: true,
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
           },
-          safari10: true,
-          ie8: true,
+        },
+        parallel: true,
+        cache: false,
+        sourceMap: false,
+      }),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          parser: require('postcss-safe-parser'),
         },
       }),
-      new OptimizeCSSAssetsPlugin({}),
     ],
-    // todo:
     splitChunks: {
       chunks: 'all',
-      name: 'client',
-      cacheGroups: {
-        commons: {
-          name: 'commons',
-          chunks: 'initial',
-          minChunks: 2,
-        },
-      },
+      name: false,
     },
   },
 });
