@@ -24,8 +24,7 @@ const prodPluginConfig = e => [
   new DuplicatePackageCheckerPlugin(),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   new CompressionPlugin(),
-  e.analysis
-  && new BundleAnalyzerPlugin({
+  e && e.analysis && new BundleAnalyzerPlugin({
     analyzerMode: 'static',
     reportFilename: './stats-analyzer.html',
     openAnalyzer: true,
