@@ -24,16 +24,11 @@ const loaderConfig = (env) => {
       exclude: /node_modules/,
       use: [
         'thread-loader',
+        'babel-loader',
         {
-          loader: 'babel-loader',
+          loader: 'stylelint-custom-processor-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: [
-              '@babel/plugin-proposal-object-rest-spread',
-              'babel-plugin-styled-components',
-              'react-hot-loader/babel'
-            ],
-            compact: prodMode,
+            configPath: paths.lint('.stylelintrc'),
           },
         },
       ],

@@ -4,5 +4,17 @@
     "serviceUrl": "http://localhost:8080"
   },
   "baseUrl": "http://localhost:3000",
-  "video": false
+  "screenshotsFolder": "e2e_result/screenshots",
+  "videosFolder": "e2e_result/videos",
+  "fixturesFolder": "config/cypress/fixtures",
+  "pluginsFile": "config/cypress/plugins",
+  "supportFile": "config/cypress/support/index.js",
+  "integrationFolder": "e2e",
+  "video": false,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "quiet": true,
+    "reportFilename": "e2e_report",
+    "reportDir": "e2e_result/reporter"
+  }
 }

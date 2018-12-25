@@ -3,8 +3,7 @@
 
 # testing
 /coverage
-/cypress/screenshots
-/cypress/video
+/e2e_result
 
 # production
 /build
