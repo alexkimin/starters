@@ -15,22 +15,47 @@ const CONFIG = require('../config');
  * loaders
  */
 const loaderConfig = (env) => {
-  const prodMode = env.NODE_ENV === 'production';
-  const scriptRegex = /\.(js|jsx)$/;
+  const prodMode = process.env.NODE_ENV === 'production';
   return [
     // todo: lint setup required
+    // loading script files
     {
-      test: scriptRegex,
+      test: /\.(js|jsx|ts|tsx)$/,
       exclude: /node_modules/,
       use: [
         'thread-loader',
-        'babel-loader',
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  modules: false,
+                },
+              ],
+            ],
+            plugins: [
+                '@babel/plugin-proposal-object-rest-spread',
+                [
+                  'babel-plugin-styled-components',
+                  {
+                    "ssr": false,
+                    "pure": true,
+                  }
+                ],
+                !prodMode && 'react-hot-loader/babel'
+              ].filter(Boolean),
+            compact: prodMode,
+          }
+        },
         {
           loader: 'stylelint-custom-processor-loader',
           options: {
             configPath: paths.lint('.stylelintrc'),
           },
-        },
+        }
       ],
     },
     // loading css files
@@ -85,7 +110,7 @@ const loaderConfig = (env) => {
  * plugins
  */
 const pluginConfig = (env) => {
-  const prodMode = env.NODE_ENV === 'production';
+  const prodMode = process.env.NODE_ENV === 'production';
   return [
     new SimpleProgressPlugin(),
     new ErrorOverlayPlugin(),
@@ -93,7 +118,7 @@ const pluginConfig = (env) => {
       // add global module if necessary
     }),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: env.NODE_ENV || process.env.NODE_ENV,
+      NODE_ENV: process.env.NODE_ENV,
       BASE_DEV: CONFIG.BASE_DEV,
       BASE_PROD: CONFIG.BASE_PROD,
     }),

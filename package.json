@@ -5,10 +5,10 @@
   "description": "project",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env.NODE_ENV=development --env.SERVER_ENV=local --config ./config/webpack/webpack.dev.js",
+    "start": "NODE_ENV=development webpack-dev-server --env.SERVER_ENV=local --config ./config/webpack/webpack.dev.js",
     "build": "run-s clean test build:only",
-    "build:only": "webpack --env.NODE_ENV=production --config ./config/webpack/webpack.prod.js",
-    "build:analysis": "webpack --env.NODE_ENV=production --env.analysis --config ./config/webpack/webpack.prod.js",
+    "build:only": "NODE_ENV=production webpack --config ./config/webpack/webpack.prod.js",
+    "build:analysis": "NODE_ENV=production webpack --env.analysis --config ./config/webpack/webpack.prod.js",
     "test": "jest --config config/jest/jest.config.js --changedSince=master",
     "test:watch": "npm run test -- --watch",
     "test:cov": "npm run test -- --coverage",

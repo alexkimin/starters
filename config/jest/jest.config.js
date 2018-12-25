@@ -21,7 +21,8 @@ const jestConfig = {
   ],
   setupTestFrameworkScriptFile: '<rootDir>/config/jest/jest.global.js',
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    // '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/config/jest/jest.process.js',
   },
   transformIgnorePatterns: [
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",

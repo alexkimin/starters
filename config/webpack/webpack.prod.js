@@ -34,7 +34,7 @@ const prodPluginConfig = (e) => [
 
 
 module.exports = (env) => ({
-  mode: env.NODE_ENV,
+  mode: process.env.NODE_ENV,
   bail: true,
   devtool: false,
   // todo

@@ -27,7 +27,7 @@ const devPluginConfig = (e) => [
     },
     configHash (webpackConfig) {
       const hash = require('node-object-hash')({ sort: false }).hash(webpackConfig);
-      return `${e.NODE_ENV}.${e.SERVER_ENV}.${hash}`;
+      return `${process.env.NODE_ENV}.${e.SERVER_ENV}.${hash}`;
     },
   }),
   new FriendlyErrorsWebpackPlugin({
@@ -36,7 +36,7 @@ const devPluginConfig = (e) => [
         `${chalk.inverse(' App is running: ')}\n\n` +
         `    [INTERNAL]: http://localhost:${PORT}\n` +
         `    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
-        `    [NODE_ENV]: ${e.NODE_ENV}\n` +
+        `    [NODE_ENV]: ${process.env.NODE_ENV}\n` +
         `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`
       ],
     },
@@ -46,7 +46,7 @@ const devPluginConfig = (e) => [
 
 
 module.exports = (env) => ({
-  mode: env.NODE_ENV,
+  mode: process.env.NODE_ENV,
   devtool: 'cheap-module-eval-source-map',
   entry: {
     app: ['@babel/polyfill', paths.entry],
