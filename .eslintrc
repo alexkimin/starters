@@ -1,0 +1,47 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "extends": ["airbnb"],
+  "globals": {
+    "Cypress": true,
+    "cy": true
+  },
+  "rules": {
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "allowArrowFunctions": true,
+        "allowBind": false,
+        "ignoreRefs": true,
+        "allowFunctions": true
+      }
+    ],
+    "react/jsx-uses-vars": "warn",
+    "react/no-did-update-set-state": "error",
+    "react/no-will-update-set-state": "error",
+    "react/no-unknown-property": "error",
+    "react/no-unused-prop-types": "error",
+    "react/no-this-in-sfc": "error",
+    "react/no-array-index-key": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/no-redundant-should-component-update": "error",
+    "react/jsx-key": "error",
+    "max-len": ["error", { "code": 100, "ignoreRegExpLiterals": true }]
+  }
+}

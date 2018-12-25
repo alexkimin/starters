@@ -17,7 +17,17 @@ const CONFIG = require('../config');
 const loaderConfig = (env) => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
-    // todo: lint setup required
+    // linting
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      enforce: 'pre',
+      loader: 'eslint-loader',
+      options: {
+        emitError: true,
+        failOnError: prodMode,
+      },
+    },
     // loading script files
     {
       test: /\.(js|jsx|ts|tsx)$/,
@@ -35,27 +45,23 @@ const loaderConfig = (env) => {
                   modules: false,
                 },
               ],
+              '@babel/preset-react',
             ],
             plugins: [
-                '@babel/plugin-proposal-object-rest-spread',
-                [
-                  'babel-plugin-styled-components',
-                  {
-                    "ssr": false,
-                    "pure": true,
-                  }
-                ],
-                !prodMode && 'react-hot-loader/babel'
-              ].filter(Boolean),
+              '@babel/plugin-proposal-object-rest-spread',
+              [
+                'babel-plugin-styled-components',
+                {
+                  ssr: false,
+                  pure: true,
+                },
+              ],
+              !prodMode && 'react-hot-loader/babel',
+            ].filter(Boolean),
             compact: prodMode,
-          }
-        },
-        {
-          loader: 'stylelint-custom-processor-loader',
-          options: {
-            configPath: paths.lint('.stylelintrc'),
           },
-        }
+        },
+        'stylelint-custom-processor-loader',
       ],
     },
     // loading css files
@@ -87,12 +93,12 @@ const loaderConfig = (env) => {
     {
       test: /\.(jpg|png|gif|ico|bmp|svg)$/,
       use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'assets/images/[name].[hash:8].[ext]',
-            fallback: 'file-loader',
-          },
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'assets/images/[name].[hash:8].[ext]',
+          fallback: 'file-loader',
+        },
       },
     },
     // loading fonts
@@ -134,21 +140,22 @@ const pluginConfig = (env) => {
         },
         prodMode
           ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
-          : undefined
-    )),
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          }
+          : undefined,
+      ),
+    ),
     new MiniCssExtractPlugin({
       filename: prodMode ? '[name].[contenthash].css' : '[name].css',
       chunkFilename: prodMode ? '[id].[contenthash].css' : '[id].css',
@@ -161,7 +168,7 @@ const pluginConfig = (env) => {
 /**
  * resolve
  */
-const resolveConfig = (env) => ({
+const resolveConfig = env => ({
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
   symlinks: false,
   alias: {},
@@ -171,7 +178,7 @@ module.exports = {
   moduleOptions: {
 
   },
-  loaders: (env) => loaderConfig(env),
-  plugins: (env) => pluginConfig(env),
-  resolve: (env) => resolveConfig(env),
+  loaders: env => loaderConfig(env),
+  plugins: env => pluginConfig(env),
+  resolve: env => resolveConfig(env),
 };

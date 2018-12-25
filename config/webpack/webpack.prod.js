@@ -3,29 +3,29 @@ const path = require('path');
 const IP = require('ip');
 const chalk = require('chalk');
 // internal
-const paths = require('./paths');
-const common = require('./webpack.common');
-const devServer = require('./devServer');
-const CONFIG = require('../config');
 // plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CONFIG = require('../config');
+const devServer = require('./devServer');
+const common = require('./webpack.common');
+const paths = require('./paths');
 
-const prodLoaderConfig = (e) => [
+const prodLoaderConfig = e => [
   ...common.loaders(e),
 ];
 
-const prodPluginConfig = (e) => [
+const prodPluginConfig = e => [
   ...common.plugins(e),
   new webpack.HashedModuleIdsPlugin(),
   new DuplicatePackageCheckerPlugin(),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   new CompressionPlugin(),
-  e.analysis &&
-  new BundleAnalyzerPlugin({
+  e.analysis
+  && new BundleAnalyzerPlugin({
     analyzerMode: 'static',
     reportFilename: './stats-analyzer.html',
     openAnalyzer: true,
@@ -33,7 +33,7 @@ const prodPluginConfig = (e) => [
 ].filter(Boolean);
 
 
-module.exports = (env) => ({
+module.exports = env => ({
   mode: process.env.NODE_ENV,
   bail: true,
   devtool: false,

@@ -7,5 +7,5 @@ module.exports = require('babel-jest')
           useBuiltIns: 'usage',
         },
       ],
-    ]
+    ],
   });

@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const paths = require('./paths');
 const CONFIG = require('../config');
 
-module.exports = (e) => ({
+module.exports = e => ({
   port: CONFIG.DEV_SERVER_PORT,
   hot: true,
   host: '0.0.0.0',
@@ -15,7 +15,7 @@ module.exports = (e) => ({
   quiet: true,
   noInfo: true,
   clientLogLevel: 'none',
-  before () {
+  before() {
     console.log(
       '\n',
       chalk.bgCyan.black('\n DEV SERVER '),
