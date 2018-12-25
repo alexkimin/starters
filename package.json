@@ -36,7 +36,7 @@
     "linters": {
       "src/**/*.{js,jsx}": [
         "npm run test -- --bail",
-        "stylelint --config config/lint/.stylelintrc --fix",
+        "stylelint --config config/lint --fix",
         "git add"
       ]
     },
