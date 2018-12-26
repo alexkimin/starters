@@ -8,7 +8,7 @@ module.exports = e => ({
   hot: true,
   host: '0.0.0.0',
   disableHostCheck: true,
-  contentBase: paths.src,
+  contentBase: paths.src(),
   historyApiFallback: true,
   compress: true,
   stats: 'none',

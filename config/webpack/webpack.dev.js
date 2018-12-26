@@ -13,9 +13,7 @@ const PORT = CONFIG.DEV_SERVER_PORT;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
-const devLoaderConfig = e => [
-  ...common.loaders(e),
-];
+const devLoaderConfig = e => [...common.loaders(e)];
 
 const devPluginConfig = e => [
   ...common.plugins(e),
@@ -24,7 +22,7 @@ const devPluginConfig = e => [
     environmentHash: {
       root: paths.root,
       directories: [],
-      files: ['package-lock.json', '.babelrc'],
+      files: ['package-lock.json', '.eslintrc'],
     },
     configHash(webpackConfig) {
       const hash = require('node-object-hash')({ sort: false }).hash(webpackConfig);
@@ -34,17 +32,16 @@ const devPluginConfig = e => [
   new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
       messages: [
-        `${chalk.inverse(' App is running: ')}\n\n`
-        + `    [INTERNAL]: http://localhost:${PORT}\n`
-        + `    [EXTERNAL]: http://${IP.address()}:${PORT}\n`
-        + `    [NODE_ENV]: ${process.env.NODE_ENV}\n`
-        + `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`,
+        `${chalk.inverse(' App is running: ')}\n\n` +
+          `    [INTERNAL]: http://localhost:${PORT}\n` +
+          `    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
+          `    [NODE_ENV]: ${process.env.NODE_ENV}\n` +
+          `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`,
       ],
     },
   }),
   new webpack.HotModuleReplacementPlugin(),
 ];
-
 
 module.exports = env => ({
   mode: process.env.NODE_ENV,

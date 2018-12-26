@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const ShakePlugin = require('webpack-common-shake').Plugin;
 // internal
 const paths = require('./paths');
 const CONFIG = require('../config');
@@ -14,17 +15,16 @@ const CONFIG = require('../config');
 /**
  * loaders
  */
-const loaderConfig = (env) => {
+const loaderConfig = env => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     // linting
     {
       test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
+      include: paths.src(),
       enforce: 'pre',
       loader: 'eslint-loader',
       options: {
-        emitError: true,
         failOnError: prodMode,
       },
     },
@@ -49,6 +49,7 @@ const loaderConfig = (env) => {
             ],
             plugins: [
               '@babel/plugin-proposal-object-rest-spread',
+              '@babel/plugin-proposal-class-properties',
               [
                 'babel-plugin-styled-components',
                 {
@@ -115,7 +116,7 @@ const loaderConfig = (env) => {
 /**
  * plugins
  */
-const pluginConfig = (env) => {
+const pluginConfig = env => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     new SimpleProgressPlugin(),
@@ -129,7 +130,7 @@ const pluginConfig = (env) => {
       BASE_PROD: CONFIG.BASE_PROD,
     }),
     new CopyWebpackPlugin([
-    //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
+      //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
     ]),
     new HtmlWebpackPlugin(
       Object.assign(
@@ -140,19 +141,19 @@ const pluginConfig = (env) => {
         },
         prodMode
           ? {
-            minify: {
-              removeComments: true,
-              collapseWhitespace: true,
-              removeRedundantAttributes: true,
-              useShortDoctype: true,
-              removeEmptyAttributes: true,
-              removeStyleLinkTypeAttributes: true,
-              keepClosingSlash: true,
-              minifyJS: true,
-              minifyCSS: true,
-              minifyURLs: true,
-            },
-          }
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            }
           : undefined,
       ),
     ),
@@ -162,6 +163,11 @@ const pluginConfig = (env) => {
     }),
     !prodMode && new WatchMissingNodeModulesPlugin(paths.node_modules),
     new CaseSensitivePathsPlugin(),
+    new ShakePlugin({
+      warnings: {
+        global: false,
+      },
+    }),
   ].filter(Boolean);
 };
 
@@ -175,9 +181,7 @@ const resolveConfig = env => ({
 });
 
 module.exports = {
-  moduleOptions: {
-
-  },
+  moduleOptions: {},
   loaders: env => loaderConfig(env),
   plugins: env => pluginConfig(env),
   resolve: env => resolveConfig(env),

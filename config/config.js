@@ -4,4 +4,5 @@ module.exports = {
   API_SERVER_URL_LOCAL: 'localhost',
   BASE_DEV: '/',
   BASE_PROD: '/',
+  PROD_SOURCE_MAP: false,
 };

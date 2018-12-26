@@ -2,45 +2,42 @@ const webpack = require('webpack');
 const path = require('path');
 const IP = require('ip');
 const chalk = require('chalk');
-// internal
 // plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// internal
 const CONFIG = require('../config');
 const devServer = require('./devServer');
 const common = require('./webpack.common');
 const paths = require('./paths');
 
-const prodLoaderConfig = e => [
-  ...common.loaders(e),
-];
+const prodLoaderConfig = e => [...common.loaders(e)];
 
-const prodPluginConfig = e => [
-  ...common.plugins(e),
-  new webpack.HashedModuleIdsPlugin(),
-  new DuplicatePackageCheckerPlugin(),
-  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  new CompressionPlugin(),
-  e && e.analysis && new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-    reportFilename: './stats-analyzer.html',
-    openAnalyzer: true,
-  }),
-].filter(Boolean);
-
+const prodPluginConfig = e =>
+  [
+    ...common.plugins(e),
+    new webpack.HashedModuleIdsPlugin(),
+    new DuplicatePackageCheckerPlugin(),
+    new CompressionPlugin(),
+    e &&
+      e.analysis &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: './stats-analyzer.html',
+        openAnalyzer: true,
+      }),
+  ].filter(Boolean);
 
 module.exports = env => ({
   mode: process.env.NODE_ENV,
   bail: true,
-  devtool: false,
-  // todo
+  devtool: CONFIG.PROD_SOURCE_MAP ? 'source-map' : false,
   entry: {
     app: ['@babel/polyfill', paths.entry],
   },
-  // todo
   output: {
     path: paths.dist,
     filename: '[name].[hash].js',
@@ -90,7 +87,7 @@ module.exports = env => ({
         },
         parallel: true,
         cache: false,
-        sourceMap: false,
+        sourceMap: CONFIG.PROD_SOURCE_MAP,
       }),
       new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: {

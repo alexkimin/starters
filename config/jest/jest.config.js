@@ -18,16 +18,12 @@ const jestConfig = {
     `<rootDir>/src/**/__tests__/**/*.(${ext})`,
     `<rootDir>/src/**/?(*.)(spec|test).(${ext})`,
   ],
-  setupFiles: [
-    '<rootDir>/config/jest/jest.init.js',
-  ],
+  setupFiles: ['<rootDir>/config/jest/jest.init.js'],
   setupTestFrameworkScriptFile: '<rootDir>/config/jest/jest.global.js',
   transform: {
     [`^.+\\.(${ext})$`]: '<rootDir>/config/jest/jest.process.js',
   },
-  transformIgnorePatterns: [
-    `[/\\\\]node_modules[/\\\\].+\\.(${ext})$`,
-  ],
+  transformIgnorePatterns: [`[/\\\\]node_modules[/\\\\].+\\.(${ext})$`],
   moduleDirectories: ['node_modules', 'src'],
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
