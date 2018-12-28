@@ -16,20 +16,19 @@ const paths = require('./paths');
 
 const prodLoaderConfig = e => [...common.loaders(e)];
 
-const prodPluginConfig = e =>
-  [
-    ...common.plugins(e),
-    new webpack.HashedModuleIdsPlugin(),
-    new DuplicatePackageCheckerPlugin(),
-    new CompressionPlugin(),
-    e &&
-      e.analysis &&
-      new BundleAnalyzerPlugin({
+const prodPluginConfig = e => [
+  ...common.plugins(e),
+  new webpack.HashedModuleIdsPlugin(),
+  new DuplicatePackageCheckerPlugin(),
+  new CompressionPlugin(),
+  e
+      && e.analysis
+      && new BundleAnalyzerPlugin({
         analyzerMode: 'static',
         reportFilename: './stats-analyzer.html',
         openAnalyzer: true,
       }),
-  ].filter(Boolean);
+].filter(Boolean);
 
 module.exports = env => ({
   mode: process.env.NODE_ENV,

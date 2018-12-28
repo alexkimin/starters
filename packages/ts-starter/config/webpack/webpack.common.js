@@ -104,7 +104,7 @@ const loaderConfig = env => {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'assets/images/[name].[hash:8].[ext]',
+          name: `assets/images/[name]${prodMode ? '.[hash:8]' : ''}.[ext]`,
           fallback: 'file-loader',
         },
       },
@@ -114,7 +114,7 @@ const loaderConfig = env => {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
       use: {
         loader: 'file-loader',
-        options: { name: 'assets/fonts/[name].[hash:8].[ext]' },
+        options: { name: `assets/fonts/[name]${prodMode ? '.[hash:8]' : ''}.[ext]` },
       },
     },
   ];
@@ -165,8 +165,8 @@ const pluginConfig = env => {
       ),
     ),
     new MiniCssExtractPlugin({
-      filename: prodMode ? '[name].[contenthash].css' : '[name].css',
-      chunkFilename: prodMode ? '[id].[contenthash].css' : '[id].css',
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
     }),
     !prodMode && new WatchMissingNodeModulesPlugin(paths.node_modules),
     new CaseSensitivePathsPlugin(),
