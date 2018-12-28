@@ -16,7 +16,7 @@
     "test:cov": "npm run test -- --coverage",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "test:e2e": "npm run cypress",
+    "test:e2e": "npm run cypress:run",
     "test:e2e:gui": "start-server-and-test start http://localhost:3000 cypress:open",
     "test:e2e:local": "start-server-and-test start http://localhost:3000 cypress:run",
     "test:open": "run-p test:open:*",
@@ -54,7 +54,7 @@
   "dependencies": {
     "@babel/polyfill": "7.2.5",
     "axios": "0.18.0",
-    "connected-react-router": "6.0.0",
+    "connected-react-router": "6.1.0",
     "cuid": "2.1.4",
     "date-fns": "1.30.1",
     "detect-browser": "3.0.1",

@@ -1,6 +1,0 @@
-/dist/**
-/coverage/**
-/e2e_result/**
-/.cache/**
-/config/**
-/node_modules/**

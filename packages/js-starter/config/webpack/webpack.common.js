@@ -43,6 +43,7 @@ const loaderConfig = env => {
                 {
                   useBuiltIns: 'usage',
                   modules: false,
+                  targets: '> 0.25%, not dead',
                 },
               ],
               '@babel/preset-react',
@@ -175,7 +176,7 @@ const pluginConfig = env => {
  * resolve
  */
 const resolveConfig = env => ({
-  extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   symlinks: false,
   alias: {},
 });

@@ -36,7 +36,7 @@ module.exports = env => ({
   bail: true,
   devtool: CONFIG.PROD_SOURCE_MAP ? 'source-map' : false,
   entry: {
-    app: ['@babel/polyfill', paths.entry],
+    app: [paths.entry],
   },
   output: {
     path: paths.dist,

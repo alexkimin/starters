@@ -5,9 +5,8 @@ const CONFIG = require('../config');
 const _path = (...paths) => path.join(process.cwd(), ...paths);
 
 module.exports = {
-  in: _path,
-  root: _path(),
-  entry: _path('src', 'index.js'),
+  root: (...s) => _path(...s),
+  entry: _path('src', 'index.ts'),
   src: (...s) => _path('src', ...s),
   dist: _path('dist'),
   html: _path('src', 'index.html'),
