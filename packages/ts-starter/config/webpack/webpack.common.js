@@ -22,11 +22,14 @@ const loaderConfig = env => {
     // linting
     {
       test: /\.(ts|tsx)$/,
-      include: paths.src(),
+      exclude: /node_modules/,
       enforce: 'pre',
       loader: 'tslint-loader',
       options: {
-        failOnHint: prodMode,
+        configFile: paths.root('tslint.json'),
+        tsConfigFile: paths.root('tsconfig.json'),
+        failOnHint: true,
+        emitErrors: true,
       },
     },
     // loading script files
@@ -174,9 +177,10 @@ const pluginConfig = env => {
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
       watch: [paths.src()],
-      async: !prodMode,
+      async: false,
+      tslint: paths.root('tslint.json'),
       tsconfig: paths.root('tsconfig.json'),
-    })
+    }),
   ].filter(Boolean);
 };
 

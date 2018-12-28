@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "tslint-config-airbnb",
-    "tslint-react",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint-config-airbnb", "tslint-react"],
   "rules": {
     "align": false,
     "import-name": false,
@@ -17,8 +13,10 @@
     "no-increment-decrement": false,
     "ter-arrow-parens": false,
     "variable-name": false,
-    "no-this-assignment": [true, {
-      "allow-destructuring": true
+    "no-this-assignment": [
+      true,
+      {
+        "allow-destructuring": true
       }
     ]
   }
