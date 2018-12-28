@@ -29,6 +29,6 @@
 }
 ```
 
-The path will resolve to jest `moduleNameMapper` and webpack `resolve.alias`.
+The path will be resolved to jest `moduleNameMapper` and webpack `resolve.alias`.
 
 Now you can import sth like `import { Button } from '@component/Button';`
