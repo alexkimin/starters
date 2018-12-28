@@ -13,7 +13,7 @@ const CONFIG = require('../config');
 const common = require('./webpack.common');
 const paths = require('./paths');
 
-const prodLoaderConfig = e=> [...common.loaders(e)];
+const prodLoaderConfig = e => [...common.loaders(e)];
 
 const prodPluginConfig = e =>
   [

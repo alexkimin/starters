@@ -22,7 +22,7 @@ const devPluginConfig = e => [
     environmentHash: {
       root: paths.root(),
       directories: [],
-      files: ['package-lock.json', 'tslint.json'],
+      files: ['package-lock.json', 'tsconfig.json', 'tslint.json'],
     },
     configHash(webpackConfig) {
       const hash = require('node-object-hash')({ sort: false }).hash(webpackConfig);

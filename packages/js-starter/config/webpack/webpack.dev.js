@@ -32,11 +32,11 @@ const devPluginConfig = e => [
   new FriendlyErrorsWebpackPlugin({
     compilationSuccessInfo: {
       messages: [
-        `${chalk.inverse(' App is running: ')}\n\n` +
-          `    [INTERNAL]: http://localhost:${PORT}\n` +
-          `    [EXTERNAL]: http://${IP.address()}:${PORT}\n` +
-          `    [NODE_ENV]: ${process.env.NODE_ENV}\n` +
-          `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`,
+        `${chalk.inverse(' App is running: ')}\n\n`
+          + `    [INTERNAL]: http://localhost:${PORT}\n`
+          + `    [EXTERNAL]: http://${IP.address()}:${PORT}\n`
+          + `    [NODE_ENV]: ${process.env.NODE_ENV}\n`
+          + `    [API_SERVER_PRESET]: ${e.SERVER_ENV}\n`,
       ],
     },
   }),
