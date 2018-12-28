@@ -1,0 +1,49 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest --config jest/jest.config.js --changedSince=master",
+    "test:watch": "npm run test -- --watch",
+    "test:cov": "npm run test -- --coverage",
+    "test:open": "opener coverage/lcov-report/index.html",
+    "clean": "rm -rf .cache",
+    "validate": "lint-staged",
+    "outdated": "npm outdated",
+    "update": "npm update",
+    "preinstall": "rm -rf node_modules",
+    "postinstall": "npm run clean"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.{js,jsx}": [
+        "npm run test -- --bail --findRelatedTests",
+        "prettier --write",
+        "eslint",
+        "git add"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3"
+  }
+}
