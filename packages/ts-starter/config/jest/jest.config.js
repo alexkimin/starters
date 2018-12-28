@@ -1,4 +1,5 @@
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { paths } = require('../../tsconfig.json').compilerOptions;
 
 const ext = 'ts|tsx';
 
@@ -32,6 +33,7 @@ const jestConfig = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/config/jest/fileMock.ts',
     '\\.(css|scss)$': '<rootDir>/config/jest/cssMock.ts',
+    ...pathsToModuleNameMapper(paths, '<rootDir>'),
   },
 };
 

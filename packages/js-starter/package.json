@@ -41,8 +41,12 @@
     "linters": {
       "src/**/*.{js,jsx}": [
         "npm run test -- --bail --findRelatedTests",
-        "eslint",
         "stylelint --fix",
+        "prettier --write",
+        "eslint",
+        "git add"
+      ],
+      "*.{html,json}": [
         "prettier --write",
         "git add"
       ]

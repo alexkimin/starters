@@ -12,6 +12,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // internal
 const paths = require('./paths');
 const CONFIG = require('../config');
+const resolveTsPathsToAlias = require('./resolveTsPathsToAlias');
 
 /**
  * loaders
@@ -190,7 +191,9 @@ const pluginConfig = env => {
 const resolveConfig = env => ({
   extensions: ['.js', '.ts', '.tsx', 'json'],
   symlinks: false,
-  alias: {},
+  alias: {
+    ...resolveTsPathsToAlias(),
+  },
 });
 
 module.exports = {

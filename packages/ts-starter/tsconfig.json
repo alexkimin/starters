@@ -2,55 +2,29 @@
   "compilerOptions": {
     "outDir": "./dist",
     "baseUrl": "./",
-    "paths": {},
-
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "sourceMap": true,
-
-    // Target latest version of ECMAScript.
     "target": "esnext",
-    // Search under node_modules for non-relative imports.
     "moduleResolution": "node",
-    // Process & infer types from .js files.
     "allowJs": false,
-    // Don't emit; allow Babel to transform files.
     "noEmit": true,
-    // Disallow features that require cross-file information for emit.
     "isolatedModules": true,
-    // Import non-ES modules as default imports.
     "esModuleInterop": true,
-
     "jsx": "react",
-
     "experimentalDecorators": true,
     "preserveConstEnums": false,
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
-
-    // some strict rules
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
-
     "skipLibCheck": true,
-    "lib": [
-      "dom",
-      "es2015",
-      "es2016",
-      "es2017",
-      "esnext"
-    ]
+    "lib": ["dom", "es2015", "es2016", "es2017", "esnext"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "dist",
-    "config",
-    "e2e",
-    "coverage",
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["dist", "config", "e2e", "coverage", "node_modules"]
 }
