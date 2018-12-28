@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ShakePlugin = require('webpack-common-shake').Plugin;
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // internal
 const paths = require('./paths');
 const CONFIG = require('../config');
@@ -20,17 +21,20 @@ const loaderConfig = env => {
   return [
     // linting
     {
-      test: /\.(js|jsx)$/,
-      include: paths.src(),
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
       enforce: 'pre',
-      loader: 'eslint-loader',
+      loader: 'tslint-loader',
       options: {
-        failOnError: prodMode,
+        configFile: paths.root('tslint.json'),
+        tsConfigFile: paths.root('tsconfig.json'),
+        failOnHint: true,
+        emitErrors: true,
       },
     },
     // loading script files
     {
-      test: /\.(js|jsx|ts|tsx)$/,
+      test: /\.(js|ts|tsx)$/,
       exclude: /node_modules/,
       use: [
         'thread-loader',
@@ -43,9 +47,11 @@ const loaderConfig = env => {
                 {
                   useBuiltIns: 'usage',
                   modules: false,
+                  targets: '> 0.25%, not dead',
                 },
               ],
               '@babel/preset-react',
+              '@babel/preset-typescript',
             ],
             plugins: [
               '@babel/plugin-proposal-object-rest-spread',
@@ -168,6 +174,13 @@ const pluginConfig = env => {
         global: false,
       },
     }),
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      watch: [paths.src()],
+      async: false,
+      tslint: paths.root('tslint.json'),
+      tsconfig: paths.root('tsconfig.json'),
+    }),
   ].filter(Boolean);
 };
 
@@ -175,7 +188,7 @@ const pluginConfig = env => {
  * resolve
  */
 const resolveConfig = env => ({
-  extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  extensions: ['.js', '.ts', '.tsx', 'json'],
   symlinks: false,
   alias: {},
 });

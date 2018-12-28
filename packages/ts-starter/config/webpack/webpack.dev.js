@@ -20,9 +20,9 @@ const devPluginConfig = e => [
   new HardSourceWebpackPlugin({
     cacheDirectory: `${paths.cache}/hard-source/[confighash]`,
     environmentHash: {
-      root: paths.root,
+      root: paths.root(),
       directories: [],
-      files: ['package-lock.json', '.eslintrc'],
+      files: ['package-lock.json', 'tslint.json'],
     },
     configHash(webpackConfig) {
       const hash = require('node-object-hash')({ sort: false }).hash(webpackConfig);
@@ -47,7 +47,7 @@ module.exports = env => ({
   mode: process.env.NODE_ENV,
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: ['@babel/polyfill', paths.entry],
+    app: [paths.entry],
   },
   output: {
     path: paths.dist,

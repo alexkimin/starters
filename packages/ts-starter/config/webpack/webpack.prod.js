@@ -10,11 +10,10 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // internal
 const CONFIG = require('../config');
-const devServer = require('./devServer');
 const common = require('./webpack.common');
 const paths = require('./paths');
 
-const prodLoaderConfig = e => [...common.loaders(e)];
+const prodLoaderConfig = e=> [...common.loaders(e)];
 
 const prodPluginConfig = e =>
   [
@@ -36,7 +35,7 @@ module.exports = env => ({
   bail: true,
   devtool: CONFIG.PROD_SOURCE_MAP ? 'source-map' : false,
   entry: {
-    app: ['@babel/polyfill', paths.entry],
+    app: [paths.entry],
   },
   output: {
     path: paths.dist,

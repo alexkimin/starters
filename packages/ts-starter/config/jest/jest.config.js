@@ -1,4 +1,6 @@
-const ext = 'js|jsx';
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+
+const ext = 'ts|tsx';
 
 const jestConfig = {
   rootDir: '../../',
@@ -7,7 +9,7 @@ const jestConfig = {
   cacheDirectory: '<rootDir>/.cache',
   collectCoverageFrom: [
     `<rootDir>/src/**/*.(${ext})`,
-    '!<rootDir>/src/**/assets/*.js',
+    '!<rootDir>/src/**/assets/*.ts',
     '!<rootDir>/src/**/*.d.ts',
   ],
   globals: {
@@ -18,18 +20,18 @@ const jestConfig = {
     `<rootDir>/src/**/__tests__/**/*.(${ext})`,
     `<rootDir>/src/**/?(*.)(spec|test).(${ext})`,
   ],
-  setupFiles: ['<rootDir>/config/jest/jest.init.js'],
-  setupTestFrameworkScriptFile: '<rootDir>/config/jest/jest.global.js',
+  setupFiles: ['<rootDir>/config/jest/jest.init.ts'],
+  setupTestFrameworkScriptFile: '<rootDir>/config/jest/jest.global.ts',
   transform: {
-    [`^.+\\.(${ext})$`]: '<rootDir>/config/jest/jest.process.js',
+    [`^.+\\.(${ext})$`]: 'ts-jest',
   },
   transformIgnorePatterns: [`[/\\\\]node_modules[/\\\\].+\\.(${ext})$`],
   moduleDirectories: ['node_modules', 'src'],
-  moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
+  moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/config/jest/fileMock.js',
-    '\\.(css|scss)$': '<rootDir>/config/jest/cssMock.js',
+      '<rootDir>/config/jest/fileMock.ts',
+    '\\.(css|scss)$': '<rootDir>/config/jest/cssMock.ts',
   },
 };
 
