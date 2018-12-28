@@ -30,7 +30,9 @@
     "clean:test:e2e": "rimraf cypress/screenshots & rimraf e2e_result",
     "validate": "lint-staged",
     "outdated": "npm outdated",
-    "update": "npm update"
+    "update": "npm update",
+    "preinstall": "rm -rf node_modules",
+    "postinstall": "npm run clean"
   },
   "husky": {
     "hooks": {
