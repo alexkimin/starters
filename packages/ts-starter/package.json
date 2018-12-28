@@ -40,14 +40,19 @@
     "linters": {
       "src/**/*.{ts,tsx}": [
         "npm run test -- --bail --findRelatedTests",
-        "tslint",
         "stylelint --fix",
+        "prettier --write",
+        "tslint",
+        "git add"
+      ],
+      "*.{html,json,js}": [
         "prettier --write",
         "git add"
       ]
     },
     "ignore": [
-      "**/assets/**/*.ts"
+      "**/assets/**/*.ts",
+      "**/assets/**/*.js"
     ]
   },
   "dependencies": {

@@ -11,11 +11,12 @@ const ShakePlugin = require('webpack-common-shake').Plugin;
 // internal
 const paths = require('./paths');
 const CONFIG = require('../config');
+const resolveTsPathsToAlias = require('./resolveTsPathsToAlias');
 
 /**
  * loaders
  */
-const loaderConfig = env => {
+const loaderConfig = (env) => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     // linting
@@ -117,7 +118,7 @@ const loaderConfig = env => {
 /**
  * plugins
  */
-const pluginConfig = env => {
+const pluginConfig = (env) => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     new SimpleProgressPlugin(),
@@ -142,19 +143,19 @@ const pluginConfig = env => {
         },
         prodMode
           ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          }
           : undefined,
       ),
     ),
@@ -178,7 +179,9 @@ const pluginConfig = env => {
 const resolveConfig = env => ({
   extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   symlinks: false,
-  alias: {},
+  alias: {
+    ...resolveTsPathsToAlias(),
+  },
 });
 
 module.exports = {
