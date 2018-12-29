@@ -1,3 +1,2 @@
 // add some init process here if necessary
-
-export default undefined;
+// @ts-ignore: remove this line once some modules imported here

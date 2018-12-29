@@ -23,7 +23,7 @@
     "max-len": [
       2,
       {
-        "code": 100,
+        "code": 80,
         "ignoreRegExpLiterals": true,
         "ignoreTemplateLiterals": true,
         "ignoreUrls": true
