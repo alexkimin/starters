@@ -1,17 +1,18 @@
-const ext = 'js|jsx';
+const ext = 'js|jsx|ts|tsx';
+const extTs = 'ts|tsx';
+const extJs = 'js|jsx';
 
 const jestConfig = {
   rootDir: '../',
   verbose: true,
   coverageDirectory: '<rootDir>/coverage',
   cacheDirectory: '<rootDir>/.cache',
-  collectCoverageFrom: [
-    `<rootDir>/src/**/*.(${ext})`,
-    '!<rootDir>/src/**/assets/*.js',
-    '!<rootDir>/src/**/*.d.ts',
-  ],
+  collectCoverageFrom: [`<rootDir>/src/**/*.(${ext})`, '!<rootDir>/src/**/*.d.ts'],
   globals: {
     NODE_ENV: 'test',
+    'ts-jest': {
+      isolatedModules: false,
+    },
   },
   testURL: 'http://localhost',
   testMatch: [
@@ -21,7 +22,8 @@ const jestConfig = {
   setupFiles: ['<rootDir>/jest/jest.init.js'],
   setupTestFrameworkScriptFile: '<rootDir>/jest/jest.global.js',
   transform: {
-    [`^.+\\.(${ext})$`]: '<rootDir>/jest/jest.process.js',
+    [`^.+\\.(${extTs})$`]: 'ts-jest',
+    [`^.+\\.(${extJs})$`]: 'babel-jest',
   },
   transformIgnorePatterns: [`[/\\\\]node_modules[/\\\\].+\\.(${ext})$`],
   moduleDirectories: ['node_modules', 'src'],

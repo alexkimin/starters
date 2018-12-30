@@ -15,15 +15,11 @@
   },
   "extends": ["airbnb"],
   "plugins": [],
-  "globals": {
-    "Cypress": true,
-    "cy": true
-  },
   "rules": {
     "max-len": [
       2,
       {
-        "code": 100,
+        "code": 80,
         "ignoreRegExpLiterals": true,
         "ignoreTemplateLiterals": true,
         "ignoreUrls": true

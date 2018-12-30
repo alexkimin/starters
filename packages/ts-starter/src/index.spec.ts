@@ -1,3 +1,6 @@
+// @ts-ignore: for example
+import index from './index';
+
 describe('example', () => {
   test('example ', () => {
     const test = { name: 'alex' };
@@ -5,5 +8,3 @@ describe('example', () => {
     expect(true).toBe(true);
   });
 });
-
-export default undefined;
