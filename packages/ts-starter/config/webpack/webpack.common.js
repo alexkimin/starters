@@ -190,7 +190,6 @@ const pluginConfig = env => {
  */
 const resolveConfig = env => ({
   extensions: ['.js', '.ts', '.tsx', 'json'],
-  symlinks: false,
   alias: {
     ...resolveTsPathsToAlias(),
   },
