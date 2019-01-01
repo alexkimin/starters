@@ -5,4 +5,5 @@ module.exports = {
   BASE_DEV: '/',
   BASE_PROD: '/',
   PROD_SOURCE_MAP: false,
+  BROWSER_CACHE_DISABLED: true,
 };

@@ -15,6 +15,9 @@ const jestConfig = {
   ],
   globals: {
     NODE_ENV: 'test',
+    'ts-jest': {
+      diagnostics: false,
+    },
   },
   testURL: 'http://localhost',
   testMatch: [
@@ -33,7 +36,7 @@ const jestConfig = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/config/jest/fileMock.ts',
     '\\.(css|scss)$': '<rootDir>/config/jest/cssMock.ts',
-    ...pathsToModuleNameMapper(paths, '<rootDir>'),
+    ...pathsToModuleNameMapper(paths, { prefix: '<rootDir>' }),
   },
 };
 

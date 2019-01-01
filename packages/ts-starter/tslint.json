@@ -6,7 +6,13 @@
     "jsx-alignment": false,
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
-    "max-line-length": [true, 80],
+    "max-line-length": [
+      true,
+      {
+        "limit": 80,
+        "ignore-pattern": "^import |^export {(.*?)} |// |test|describe"
+      }
+    ],
     "no-boolean-literal-compare": false,
     "no-console": false,
     "no-duplicate-imports": false,

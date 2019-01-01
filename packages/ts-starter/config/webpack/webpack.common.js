@@ -64,6 +64,8 @@ const loaderConfig = env => {
                   pure: true,
                 },
               ],
+              'ramda',
+              'lodash',
               !prodMode && 'react-hot-loader/babel',
             ].filter(Boolean),
             compact: prodMode,
@@ -114,7 +116,9 @@ const loaderConfig = env => {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
       use: {
         loader: 'file-loader',
-        options: { name: `assets/fonts/[name]${prodMode ? '.[hash:8]' : ''}.[ext]` },
+        options: {
+          name: `assets/fonts/[name]${prodMode ? '.[hash:8]' : ''}.[ext]`,
+        },
       },
     },
   ];
@@ -133,6 +137,7 @@ const pluginConfig = env => {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV,
+      BROWSER_CACHE_DISABLED: CONFIG.BROWSER_CACHE_DISABLED,
       BASE_DEV: CONFIG.BASE_DEV,
       BASE_PROD: CONFIG.BASE_PROD,
     }),
@@ -190,8 +195,9 @@ const pluginConfig = env => {
  */
 const resolveConfig = env => ({
   extensions: ['.js', '.ts', '.tsx', 'json'],
-  symlinks: false,
   alias: {
+    warning: paths.node_modules('warning'),
+    'hoist-non-react-statics': paths.node_modules('hoist-non-react-statics'),
     ...resolveTsPathsToAlias(),
   },
 });

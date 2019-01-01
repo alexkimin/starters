@@ -6,12 +6,12 @@ const _path = (...paths) => path.join(process.cwd(), ...paths);
 
 module.exports = {
   root: (...s) => _path(...s),
-  entry: _path('src', 'index.ts'),
+  entry: _path('src', 'index.tsx'),
   src: (...s) => _path('src', ...s),
   dist: _path('dist'),
   html: _path('src', 'index.html'),
   cache: _path('.cache'),
-  node_modules: _path('node_modules'),
+  node_modules: (...s) => _path('node_modules', ...s),
   local_modules: _path('local_modules'),
   devBase: CONFIG.BASE_DEV,
   prodBase: CONFIG.BASE_PROD,
