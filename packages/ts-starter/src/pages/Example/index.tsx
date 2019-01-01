@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 // import { Route, Switch } from 'react-router-dom';
 
 // TYPES
@@ -10,4 +12,11 @@ class Example extends Component<IExampleProps> {
   }
 }
 
-export default Example;
+const m = (state: any) => ({});
+
+const d = (dispatch: any) => bindActionCreators({}, dispatch);
+
+export default connect(
+  m,
+  d,
+)(Example);
