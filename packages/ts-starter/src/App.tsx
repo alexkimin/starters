@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { Route, Switch } from 'react-router-dom';
+// PAGES
+import Example from '@Pages/Example';
+import Help from '@Pages/Help';
 // ASSETS
 import favicon from '@Images/favicon.ico';
 // CONFIG
@@ -42,6 +46,10 @@ class App extends Component<IAppProps> {
           )}
         </Helmet>
         {/* App Routes */}
+        <Switch>
+          <Route exact path="/entry" component={Example} />
+          <Route path="*" component={Help} />
+        </Switch>
       </>
     );
   }
