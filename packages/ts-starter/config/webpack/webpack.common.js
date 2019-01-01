@@ -2,12 +2,10 @@ const webpack = require('webpack');
 // plugins
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const ShakePlugin = require('webpack-common-shake').Plugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // internal
 const paths = require('./paths');
@@ -61,11 +59,11 @@ const loaderConfig = env => {
                 'babel-plugin-styled-components',
                 {
                   ssr: false,
-                  pure: true,
+                  pure: prodMode,
                 },
               ],
-              'ramda',
-              'lodash',
+              !prodMode && 'ramda',
+              !prodMode && 'lodash',
               !prodMode && 'react-hot-loader/babel',
             ].filter(Boolean),
             compact: prodMode,
@@ -132,18 +130,15 @@ const pluginConfig = env => {
   return [
     new SimpleProgressPlugin(),
     new ErrorOverlayPlugin(),
-    new webpack.ProvidePlugin({
-      // add global module if necessary
-    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV,
       BROWSER_CACHE_DISABLED: CONFIG.BROWSER_CACHE_DISABLED,
       BASE_DEV: CONFIG.BASE_DEV,
       BASE_PROD: CONFIG.BASE_PROD,
     }),
-    new CopyWebpackPlugin([
-      //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
-    ]),
+    // new CopyWebpackPlugin([
+    //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
+    // ]),
     new HtmlWebpackPlugin(
       Object.assign(
         {},
@@ -169,17 +164,7 @@ const pluginConfig = env => {
           : undefined,
       ),
     ),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
-    }),
-    !prodMode && new WatchMissingNodeModulesPlugin(paths.node_modules),
     new CaseSensitivePathsPlugin(),
-    new ShakePlugin({
-      warnings: {
-        global: false,
-      },
-    }),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
       watch: [paths.src()],

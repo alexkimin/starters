@@ -12,6 +12,7 @@ const PORT = CONFIG.DEV_SERVER_PORT;
 // plugins
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 
 const devLoaderConfig = e => [...common.loaders(e)];
 
@@ -19,13 +20,15 @@ const devPluginConfig = e => [
   ...common.plugins(e),
   new HardSourceWebpackPlugin({
     cacheDirectory: `${paths.cache}/hard-source/[confighash]`,
-    environmentHash: {
-      root: paths.root(),
-      directories: [],
-      files: ['package-lock.json', 'tsconfig.json', 'tslint.json'],
-    },
+    // environmentHash: {
+    //   root: paths.root(),
+    //   directories: [],
+    //   files: ['package-lock.json', 'tsconfig.json', 'tslint.json'],
+    // },
     configHash(webpackConfig) {
-      const hash = require('node-object-hash')({ sort: false }).hash(webpackConfig);
+      const hash = require('node-object-hash')({ sort: false }).hash(
+        webpackConfig,
+      );
       return `${process.env.NODE_ENV}.${e.SERVER_ENV}.${hash}`;
     },
   }),
@@ -40,6 +43,7 @@ const devPluginConfig = e => [
       ],
     },
   }),
+  new WatchMissingNodeModulesPlugin(paths.node_modules),
   new webpack.HotModuleReplacementPlugin(),
 ];
 

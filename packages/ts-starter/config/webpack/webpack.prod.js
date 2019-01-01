@@ -7,7 +7,10 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ShakePlugin = require('webpack-common-shake').Plugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 // internal
 const CONFIG = require('../config');
 const common = require('./webpack.common');
@@ -20,7 +23,16 @@ const prodPluginConfig = e =>
     ...common.plugins(e),
     new webpack.HashedModuleIdsPlugin(),
     new DuplicatePackageCheckerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
+    }),
     new CompressionPlugin(),
+    new ShakePlugin({
+      warnings: {
+        global: false,
+      },
+    }),
     e &&
       e.analysis &&
       new BundleAnalyzerPlugin({
