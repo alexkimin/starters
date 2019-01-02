@@ -96,7 +96,7 @@ module.exports = env => ({
     ],
     splitChunks: {
       chunks: 'all',
-      name: false,
+      automaticNameDelimiter: '.',
     },
   },
 });
