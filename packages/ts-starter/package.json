@@ -106,6 +106,7 @@
     "@types/react-test-renderer": "^16.0.3",
     "@types/smoothscroll-polyfill": "^0.3.0",
     "@types/styled-components": "^4.1.4",
+    "@types/styled-system": "^3.1.0",
     "@types/webpack-env": "^1.13.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",

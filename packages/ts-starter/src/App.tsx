@@ -7,12 +7,14 @@ import Help from '@Pages/Help';
 // ASSETS
 import favicon from '@Images/favicon.ico';
 // CONFIG
-
+import { GlobalStyle } from '@Styled';
 // TYPES
 export interface IAppProps {}
 
 class App extends Component<IAppProps> {
   render() {
+    const devUrl = process.env.NODE_ENV === 'production' ? '' : 'localhost/*';
+    const hostUrl = '*.income.com.sg';
     return (
       <>
         {/* Meta tag setups */}
@@ -28,23 +30,23 @@ class App extends Component<IAppProps> {
               key="STS"
             />,
           ]}
-          {process.env.NODE_ENV === 'production' && (
-            <meta
-              http-equiv="Content-Security-Policy"
-              content={
-                /* tslint:disable */
-                `default-src 'self' 'unsafe-inline' 'unsafe-eval' data:;
-                  script-src 'self' 'unsafe-inline' 'unsafe-eval' data:;
-                  style-src 'self' 'unsafe-inline' data: blob:;
-                  img-src 'self' 'unsafe-inline' data:;
-                  frame-src *;
-                  child-src *;
-                  font-src *;`
-                /* tslint:enable */
-              }
-            />
-          )}
+          <meta
+            http-equiv="Content-Security-Policy"
+            content={
+              /* tslint:disable */
+              `default-src 'self' 'unsafe-inline' 'unsafe-eval' ${devUrl} ${hostUrl} data:;
+                script-src 'self' 'unsafe-inline' 'unsafe-eval' ${devUrl} ${hostUrl} data:;
+                style-src 'self' 'unsafe-inline' ${devUrl} ${hostUrl} data: blob:;
+                img-src 'self' ${devUrl} ${hostUrl} data:;
+                frame-src *;
+                child-src *;
+                font-src *;`
+              /* tslint:enable */
+            }
+          />
         </Helmet>
+        {/* Global CSS */}
+        <GlobalStyle />
         {/* App Routes */}
         <Switch>
           <Route exact path="/entry" component={Example} />

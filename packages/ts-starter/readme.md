@@ -1,5 +1,15 @@
 ## 1. DEV environment setup
 
+### env
+
+- NDOE - 8.12.0 (LTS)
+
+### Linting
+
+- tslint: airbnb
+- prettier: airbnb
+- stylelint: airbnb
+
 ### vscode
 
 `.vscode/settings.json`

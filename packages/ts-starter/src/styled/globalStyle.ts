@@ -1,6 +1,6 @@
 import { createGlobalStyle } from '@Styled';
 
-createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   /* Fonts */
   /* @font-face {
     font-family: 'Open Sans';
