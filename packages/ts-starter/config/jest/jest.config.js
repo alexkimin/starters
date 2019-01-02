@@ -9,7 +9,12 @@ const jestConfig = {
   coverageDirectory: '<rootDir>/coverage',
   cacheDirectory: '<rootDir>/.cache',
   collectCoverageFrom: [
-    `<rootDir>/src/**/*.(${ext})`,
+    `<rootDir>/src/modules/**/*.(${ext})`,
+    `<rootDir>/src/pages/**/*.(${ext})`,
+    `<rootDir>/src/containers/**/*.(${ext})`,
+    `<rootDir>/src/components/**/*.(${ext})`,
+    `<rootDir>/src/libs/**/*.(${ext})`,
+    `<rootDir>/src/utils/**/*.(${ext})`,
     '!<rootDir>/src/**/assets/*.ts',
     '!<rootDir>/src/**/*.d.ts',
   ],
