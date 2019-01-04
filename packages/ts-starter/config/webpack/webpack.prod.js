@@ -49,7 +49,7 @@ module.exports = env => ({
   bail: true,
   devtool: CONFIG.PROD_SOURCE_MAP ? 'source-map' : false,
   entry: {
-    app: [paths.entry],
+    app: ['@babel/polyfill', paths.entry],
   },
   output: {
     path: paths.dist,
@@ -57,6 +57,7 @@ module.exports = env => ({
     chunkFilename: '[name].[chunkhash].bundle.js',
     publicPath: paths.prodBase,
     pathinfo: false,
+    globalObject: 'this',
   },
   module: {
     ...common.moduleOptions,

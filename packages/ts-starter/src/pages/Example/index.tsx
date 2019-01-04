@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { push, Push, goBack, GoBack } from 'connected-react-router';
+import { Document } from 'react-pdf/dist/entry.webpack';
 // COMPONENT
 import {
   NormalExample,
@@ -20,8 +21,12 @@ export interface IExampleProps extends RouteComponentProps<{ id?: string }> {
   goBack: GoBack;
 }
 
+const normalJSFn = props => console.log(props);
+
 class Example extends Component<IExampleProps> {
   componentDidMount() {
+    // normal JS coding is okay
+    normalJSFn('hello JS');
     console.log(this.props);
     // fetch test
     axios
@@ -33,6 +38,7 @@ class Example extends Component<IExampleProps> {
     return (
       <>
         <div>Welcome to Example Page ID: {this.props.match.params.id}</div>
+        <Document />
         <StyledSystemExample
           onClick={() => {
             console.log('clicked');

@@ -46,7 +46,7 @@ module.exports = env => ({
   mode: process.env.NODE_ENV,
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: [paths.entry],
+    app: ['@babel/polyfill', paths.entry],
   },
   output: {
     path: paths.dist,
@@ -54,6 +54,7 @@ module.exports = env => ({
     chunkFilename: '[name].bundle.js',
     publicPath: paths.devBase,
     pathinfo: true,
+    globalObject: 'this',
   },
   module: {
     ...common.rules,

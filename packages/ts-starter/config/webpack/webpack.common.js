@@ -44,7 +44,6 @@ const loaderConfig = env => {
               [
                 '@babel/preset-env',
                 {
-                  useBuiltIns: 'usage',
                   modules: false,
                   targets: '> 0.25%, not dead',
                 },
