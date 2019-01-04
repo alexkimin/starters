@@ -10,7 +10,7 @@
       true,
       {
         "limit": 80,
-        "ignore-pattern": "^import |^export {(.*?)} |// |test|describe"
+        "ignore-pattern": "^import |^export {(.*?)} |// |test|describe|{/*| * |"
       }
     ],
     "no-boolean-literal-compare": false,

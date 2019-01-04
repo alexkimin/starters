@@ -9,6 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ShakePlugin = require('webpack-common-shake').Plugin;
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 // internal
@@ -28,6 +29,7 @@ const prodPluginConfig = e =>
       chunkFilename: '[id].[contenthash].css',
     }),
     new CompressionPlugin(),
+    new LodashModuleReplacementPlugin(),
     new ShakePlugin({
       warnings: {
         global: false,
@@ -108,7 +110,7 @@ module.exports = env => ({
     ],
     splitChunks: {
       chunks: 'all',
-      name: false,
+      automaticNameDelimiter: '.',
     },
   },
 });

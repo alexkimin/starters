@@ -1,3 +1,9 @@
+## Index
+
+[1. DEV environment setup](#1.-dev-environment-setup)
+
+[3. Relative path import resolve config](#3.-relative-path import-resolve-config)
+
 ## 1. DEV environment setup
 
 ---
@@ -41,7 +47,7 @@ and reload vscode (press F1 -> reload window)
 
 ---
 
-## 2. Relative path import resolve config
+## 3. Relative path import resolve config
 
 `./tsconfig.json`
 

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 // plugins
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -62,9 +62,22 @@ const loaderConfig = env => {
                   pure: prodMode,
                 },
               ],
-              !prodMode && 'ramda',
-              !prodMode && 'lodash',
-              !prodMode && 'react-hot-loader/babel',
+              [
+                'import',
+                {
+                  libraryName: 'antd',
+                  libraryDirectory: 'es',
+                  style: 'css',
+                },
+              ],
+              prodMode && [
+                'ramda',
+                {
+                  useES: true,
+                },
+              ],
+              prodMode && 'lodash',
+              'react-hot-loader/babel',
             ].filter(Boolean),
             compact: prodMode,
           },
@@ -75,7 +88,7 @@ const loaderConfig = env => {
     // loading css files
     {
       test: /\.css$/,
-      exclude: /node_modules/,
+      include: /antd/,
       use: [
         prodMode ? MiniCssExtractPlugin.loader : 'style-loader',
         'css-loader',
@@ -136,9 +149,8 @@ const pluginConfig = env => {
       BASE_DEV: CONFIG.BASE_DEV,
       BASE_PROD: CONFIG.BASE_PROD,
     }),
-    // new CopyWebpackPlugin([
-    //   { from: './src/App/assets/javascripts', to: './assets/javascripts' },
-    // ]),
+    new CopyWebpackPlugin([{ from: './src/assets/js', to: './assets/js' }]),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin(
       Object.assign(
         {},

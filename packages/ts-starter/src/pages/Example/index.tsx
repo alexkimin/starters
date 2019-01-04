@@ -1,32 +1,82 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Route, Switch } from 'react-router-dom';
-
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { push, Push, goBack, GoBack } from 'connected-react-router';
 // COMPONENT
-import ExampleComp from '@Components/ExampleComp';
+import {
+  NormalExample,
+  StyledSystemExample,
+  AntDesignExample,
+} from '@Components/ExampleComp';
+// UTILS
+import { pipe } from 'ramda';
+import _ from 'lodash';
 // TYPES
-export interface IExampleProps {}
+import { RouteComponentProps } from 'react-router-dom';
+export interface IExampleProps extends RouteComponentProps<{ id?: string }> {
+  push: Push;
+  goBack: GoBack;
+}
 
 class Example extends Component<IExampleProps> {
+  componentDidMount() {
+    console.log(this.props);
+    // fetch test
+    axios
+      .get('https://dog.ceo/api/breeds/image/random')
+      .then(data => console.log(data));
+    // routing hook testing
+  }
   render() {
     return (
-      <ExampleComp
-        onClick={() => console.log('clicked')}
-        bg={'black'}
-        color={'yellow'}
-      >
-        Example Page
-      </ExampleComp>
+      <>
+        <div>Welcome to Example Page ID: {this.props.match.params.id}</div>
+        <StyledSystemExample
+          onClick={() => {
+            console.log('clicked');
+            return this.props.push('/example/2');
+          }}
+          bg={'black'}
+          color={'yellow'}
+        >
+          {/* testing tree shaking for ramda, lodash */}
+          {pipe((s: any): any => s)(
+            _.camelCase('StyledSystem Example and goto /help'),
+          )}
+        </StyledSystemExample>
+        <NormalExample
+          onClick={() => {
+            console.log('clicked');
+            return this.props.goBack();
+          }}
+          normal={'hello'}
+        >
+          Normal Button + go back
+        </NormalExample>
+        <AntDesignExample
+          id={'testID'}
+          data-test-id={'testID'}
+          color={'red'}
+          test={'hello'}
+          size={'large'}
+        >
+          Ant Button
+        </AntDesignExample>
+      </>
     );
   }
 }
 
 const m = (state: any) => ({});
 
-const d = (dispatch: any) => bindActionCreators({}, dispatch);
+const d = (dispatch: any) => bindActionCreators({ push, goBack }, dispatch);
 
-export default connect(
-  m,
-  d,
+export default pipe(
+  withRouter,
+  connect(
+    m,
+    d,
+  ),
 )(Example);

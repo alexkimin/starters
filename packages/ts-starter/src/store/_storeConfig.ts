@@ -35,7 +35,7 @@ export const history = createBrowserHistory({
 export const persistConfig: PersistConfig = {
   storage,
   key: 'root',
-  whitelist: ['app'],
+  whitelist: ['modify'],
   timeout: null,
   transforms: persistTransformFilter,
 };

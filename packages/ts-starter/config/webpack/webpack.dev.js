@@ -20,11 +20,6 @@ const devPluginConfig = e => [
   ...common.plugins(e),
   new HardSourceWebpackPlugin({
     cacheDirectory: `${paths.cache}/hard-source/[confighash]`,
-    // environmentHash: {
-    //   root: paths.root(),
-    //   directories: [],
-    //   files: ['package-lock.json', 'tsconfig.json', 'tslint.json'],
-    // },
     configHash(webpackConfig) {
       const hash = require('node-object-hash')({ sort: false }).hash(
         webpackConfig,
