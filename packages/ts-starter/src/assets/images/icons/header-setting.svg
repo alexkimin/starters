@@ -1,0 +1,11 @@
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="topnav" transform="translate(-1153.000000, -17.000000)">
+            <circle id="Oval-Copy-5" stroke="#FFFFFF" cx="1171" cy="35" r="17"></circle>
+            <g id="single-01" transform="translate(1163.000000, 27.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                <path d="M8,9 C10.206,9 12,7.137 12,4.84615385 L12,4.15384615 C12,1.863 10.206,0 8,0 C5.794,0 4,1.863 4,4.15384615 L4,4.84615385 C4,7.137 5.794,9 8,9 Z" id="Shape"></path>
+                <path d="M12.4922727,11.6517716 C9.285,10.7827428 5.71568182,10.7827428 2.50772727,11.6517716 C1.03159091,12.0519383 0,13.3744894 0,14.8691121 L0,17 L15,17 L15,14.8691121 C15,13.3744894 13.9684091,12.0519383 12.4922727,11.6517716 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
