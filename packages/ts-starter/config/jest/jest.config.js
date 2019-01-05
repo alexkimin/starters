@@ -11,10 +11,11 @@ const jestConfig = {
   collectCoverageFrom: [
     `<rootDir>/src/modules/**/*.(${ext})`,
     `<rootDir>/src/pages/**/*.(${ext})`,
-    `<rootDir>/src/containers/**/*.(${ext})`,
     `<rootDir>/src/components/**/*.(${ext})`,
-    `<rootDir>/src/libs/**/*.(${ext})`,
     `<rootDir>/src/utils/**/*.(${ext})`,
+    '!<rootDir>/src/components/_base/ExampleComp/*.tsx',
+    '!<rootDir>/src/pages/Example/**/*.(tsx|ts)',
+    '!<rootDir>/src/modules/example/*.ts',
     '!<rootDir>/src/**/assets/*.ts',
     '!<rootDir>/src/**/*.d.ts',
   ],

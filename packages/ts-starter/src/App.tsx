@@ -4,10 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 // PAGES
 import Example from '@Pages/Example';
 import Help from '@Pages/Help';
-// CONTAINERS
-import AppLayout from '@Containers/AppLayout';
 // ASSETS
-import favicon from '@Images/favicon.ico';
+import favicon from '@Images/icons/favicon.ico';
 // CONFIG
 import { GlobalStyle } from '@Styled';
 // TYPES
@@ -60,13 +58,11 @@ class App extends Component<IAppProps> {
         {/* Global CSS */}
         <GlobalStyle />
         {/* App Routes */}
-        <AppLayout>
-          <Switch>
-            <Route exact path="/example/:id" component={Example} />
-            <Route exact path="/help" component={Help} />
-            <Route path="*" component={Help} />
-          </Switch>
-        </AppLayout>
+        <Switch>
+          <Route exact path="/example/:id" component={Example} />
+          <Route exact path="/help" component={Help} />
+          <Route path="*" component={Help} />
+        </Switch>
       </>
     );
     /* tslint:enable:max-line-length */

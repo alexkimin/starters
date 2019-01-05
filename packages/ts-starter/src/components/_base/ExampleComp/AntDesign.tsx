@@ -2,8 +2,9 @@
  * Example Component with Ant Design and Typescript + styled-component wrapping
  */
 import React from 'react';
-import { Button } from 'antd';
 import { styled, acceleration } from '@Styled';
+import { Button } from 'antd';
+import 'antd/es/button/style/index.css';
 // TYPES
 import { NativeButtonProps } from 'antd/es/button/button';
 

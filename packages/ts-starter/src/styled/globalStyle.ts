@@ -1,8 +1,8 @@
 import { createGlobalStyle } from '@Styled';
 
 // todo: depends on the antd usage, configure css properly.
-// font-family, font-size
 export const GlobalStyle = createGlobalStyle`
+
   /* Fonts */
   /* @font-face {
     font-family: 'Open Sans';
@@ -15,11 +15,8 @@ export const GlobalStyle = createGlobalStyle`
   hr,h1,h2,h3,h4,h5,h6 {
     margin: 0;
     padding: 0;
-    font-size: 100% !important;
-    font-family: inherit !important;
   }
   h1,h2,h3,h4,h5,h6 {
-    font-size: 100%;
     font-weight: normal;
   }
   ul {

@@ -12,8 +12,6 @@
       "@Config/*": ["src/config/*"],
       "@Constants": ["src/constants"],
       "@Constants/*": ["src/constants/*"],
-      "@Containers": ["src/containers"],
-      "@Containers/*": ["src/containers/*"],
       "@Fonts/*": ["src/assets/fonts/*"],
       "@Images/*": ["src/assets/images/*"],
       "@Modules": ["src/modules"],

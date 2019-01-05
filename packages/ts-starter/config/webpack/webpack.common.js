@@ -87,7 +87,7 @@ const loaderConfig = env => {
     // loading css files
     {
       test: /\.css$/,
-      include: /antd/,
+      include: [/antd/],
       use: [
         prodMode ? MiniCssExtractPlugin.loader : 'style-loader',
         'css-loader',
@@ -193,6 +193,8 @@ const resolveConfig = env => ({
   extensions: ['.js', '.ts', '.tsx', 'json'],
   alias: {
     warning: paths.node_modules('warning'),
+    isarray: paths.node_modules('isarray'),
+    'regenerator-runtime': paths.node_modules('regenerator-runtime'),
     'hoist-non-react-statics': paths.node_modules('hoist-non-react-statics'),
     ...resolveTsPathsToAlias(),
   },

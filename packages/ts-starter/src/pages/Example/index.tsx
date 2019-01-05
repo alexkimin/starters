@@ -5,12 +5,16 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { push, Push, goBack, GoBack } from 'connected-react-router';
 import { Document } from 'react-pdf/dist/entry.webpack';
+import { styled } from '@Styled';
+import { compose } from 'recompose';
+import headerSetting from '@Assets/images/icons/header-setting.svg';
 // COMPONENT
 import {
   NormalExample,
   StyledSystemExample,
   AntDesignExample,
-} from '@Components/ExampleComp';
+  AntdModal,
+} from '@Components/_base/ExampleComp';
 // UTILS
 import { pipe } from 'ramda';
 import _ from 'lodash';
@@ -23,7 +27,24 @@ export interface IExampleProps extends RouteComponentProps<{ id?: string }> {
 
 const normalJSFn = props => console.log(props);
 
-class Example extends Component<IExampleProps> {
+const NormalJSComp = styled('div')`
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const NormalJSCompIcon = styled('img')`
+  width: 50px;
+  height: 50px;
+`;
+
+class Example extends Component<IExampleProps, any> {
+  state = {
+    openOverlay: false,
+  };
   componentDidMount() {
     // normal JS coding is okay
     normalJSFn('hello JS');
@@ -38,7 +59,16 @@ class Example extends Component<IExampleProps> {
     return (
       <>
         <div>Welcome to Example Page ID: {this.props.match.params.id}</div>
+        <NormalJSComp>
+          <NormalJSCompIcon src={headerSetting} />
+        </NormalJSComp>
         <Document />
+        <AntdModal
+          visible={this.state.openOverlay}
+          onCancel={() => this.setState({ openOverlay: false })}
+        >
+          <div>hello</div>
+        </AntdModal>
         <StyledSystemExample
           onClick={() => {
             console.log('clicked');
@@ -67,6 +97,7 @@ class Example extends Component<IExampleProps> {
           color={'red'}
           test={'hello'}
           size={'large'}
+          onClick={() => this.setState({ openOverlay: true })}
         >
           Ant Button
         </AntDesignExample>
@@ -79,7 +110,7 @@ const m = (state: any) => ({});
 
 const d = (dispatch: any) => bindActionCreators({ push, goBack }, dispatch);
 
-export default pipe(
+export default compose(
   withRouter,
   connect(
     m,

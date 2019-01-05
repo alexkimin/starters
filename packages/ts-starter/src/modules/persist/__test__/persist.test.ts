@@ -1,4 +1,4 @@
-import persist from '../persist';
+import persist from '..';
 
 describe('modules/persist', () => {
   const { actions, reducers, interceptor } = persist;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export interface IAppLayout {}
+export interface IPageLayout {}
 
-class AppLayout extends Component<IAppLayout> {
+class PageLayout extends Component<IPageLayout> {
   render() {
     return <div>{this.props.children}</div>;
   }
 }
 
-export default AppLayout;
+export default PageLayout;

@@ -30,6 +30,11 @@ type TIDs = {
 
 // Utils
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+interface Dynamic {
+  [key: string]: any;
+}
+
+type valueof<T> = T[keyof T];
 
 // Libs
 declare module 'react-pdf' {

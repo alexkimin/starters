@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { disbatch } from 'redux-act';
-import createSagaMiddleware from 'redux-saga';
 import { createBrowserHistory } from 'history';
-import { routerMiddleware } from 'connected-react-router';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
+// MIDDLEWARES
+import { routerMiddleware } from 'connected-react-router';
+import createSagaMiddleware from 'redux-saga';
+import thunkWithStore from './middleware/thunkWithStore';
 // INTERNALS
 import createRootReducer from '@Store/_rootReducer';
 import rootSaga from '@Store/_rootSaga';
@@ -46,7 +48,11 @@ export default function configureStore(
 ): CreateStore<ApplicationState> {
   // Middlewares
   const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [routerMiddleware(history), sagaMiddleware];
+  const middlewares = [
+    routerMiddleware(history),
+    thunkWithStore,
+    sagaMiddleware,
+  ];
 
   // Enhancers
   const composeEnhancers = composeWithDevTools({});
