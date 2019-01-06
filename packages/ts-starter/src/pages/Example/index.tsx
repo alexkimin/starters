@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { push, Push, goBack, GoBack } from 'connected-react-router';
 import { Document } from 'react-pdf/dist/entry.webpack';
 import { styled } from '@Styled';
 import { compose } from 'recompose';
 import headerSetting from '@Assets/images/icons/header-setting.svg';
+import exampleModule from '@Modules/example';
 // COMPONENT
 import {
   NormalExample,
@@ -23,9 +23,10 @@ import { RouteComponentProps } from 'react-router-dom';
 export interface IExampleProps extends RouteComponentProps<{ id?: string }> {
   push: Push;
   goBack: GoBack;
+  getDogsApi: any;
 }
 
-const normalJSFn = props => console.log(props);
+const normalJSFn = (props: any) => console.log(props);
 
 const NormalJSComp = styled('div')`
   width: 100px;
@@ -48,17 +49,15 @@ class Example extends Component<IExampleProps, any> {
   componentDidMount() {
     // normal JS coding is okay
     normalJSFn('hello JS');
-    console.log(this.props);
-    // fetch test
-    axios
-      .get('https://dog.ceo/api/breeds/image/random')
-      .then(data => console.log(data));
-    // routing hook testing
+    this.props.getDogsApi({
+      name: 'bong',
+    });
   }
   render() {
     return (
       <>
         <div>Welcome to Example Page ID: {this.props.match.params.id}</div>
+        {/* normal js component also okay */}
         <NormalJSComp>
           <NormalJSCompIcon src={headerSetting} />
         </NormalJSComp>
@@ -108,7 +107,8 @@ class Example extends Component<IExampleProps, any> {
 
 const m = (state: any) => ({});
 
-const d = (dispatch: any) => bindActionCreators({ push, goBack }, dispatch);
+const d = (dispatch: any) =>
+  bindActionCreators({ push, goBack, ...exampleModule.actions }, dispatch);
 
 export default compose(
   withRouter,

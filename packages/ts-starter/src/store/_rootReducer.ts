@@ -4,22 +4,23 @@ import { connectRouter } from 'connected-react-router';
 // UTILS
 import { registerReducers, mergeAll } from '@Store/utils';
 // MODULES
+import example from '@Modules/example';
 import persist from '@Modules/persist';
 // TYPES
 import { AnyAction } from 'redux';
 import { History } from 'history';
 export interface Modules<S> {
-  reducer?: object;
-  reducers: object;
-  actions: object;
+  reducer: object;
+  action: object;
   initState: S;
 }
 
 /* update below when there is a new module */
-type AppMergedState = {};
+type AppMergedState = any;
 
 const modules: Modules<AppMergedState>[] = [
   /* add more models to be merged as one reducer */
+  example,
 ];
 
 export interface ApplicationState {

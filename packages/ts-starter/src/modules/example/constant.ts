@@ -1,1 +1,3 @@
-export default undefined;
+export const moduleName = 'example';
+
+export const modulePath = 'example';

@@ -28,6 +28,10 @@ type TIDs = {
   role?: string;
 };
 
+interface Res extends Response {
+  data?: any;
+}
+
 // Utils
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 interface Dynamic {
@@ -37,6 +41,7 @@ interface Dynamic {
 type valueof<T> = T[keyof T];
 
 // Libs
+declare module 'react-pdf/dist/entry.webpack';
 declare module 'react-pdf' {
   import * as React from 'react';
 
