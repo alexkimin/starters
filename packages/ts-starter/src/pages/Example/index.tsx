@@ -86,7 +86,7 @@ class Example extends Component<IExampleProps, any> {
             console.log('clicked');
             return this.props.goBack();
           }}
-          normal={'hello'}
+          color={'green'}
         >
           Normal Button + go back
         </NormalExample>

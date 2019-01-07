@@ -6,7 +6,7 @@ import { styled, acceleration } from '@Styled';
 
 interface IExampleCompProps extends IDs {
   onClick?: (s: any) => any;
-  normal: string;
+  color: string;
 }
 
 // as a styled-component
@@ -14,7 +14,7 @@ const ExampleComp = styled('button')<IExampleCompProps>`
   ${acceleration}
   display: flex;
   width: 100px;
-  color: green;
+  color: ${({ color }) => color};
 `;
 
 ExampleComp.defaultProps = {

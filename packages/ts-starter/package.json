@@ -7,6 +7,7 @@
   "sideEffects": false,
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --env.SERVER_ENV=local --config ./config/webpack/webpack.dev.js",
+    "start:comp": "NODE_ENV=development styleguidist server --config ./config/styleguidist/styleguide.config.js",
     "build": "run-s clean test build:only",
     "build:only": "NODE_ENV=production webpack --config ./config/webpack/webpack.prod.js",
     "build:analysis": "NODE_ENV=production webpack --env.analysis --config ./config/webpack/webpack.prod.js",
@@ -147,7 +148,9 @@
     "postcss-safe-parser": "^4.0.1",
     "prettier": "^1.15.3",
     "react-dev-utils": "^7.0.0",
+    "react-docgen-typescript": "^1.12.3",
     "react-hot-loader": "^4.6.3",
+    "react-styleguidist": "^8.0.6",
     "react-test-renderer": "^16.7.0",
     "redux-devtools-extension": "^2.13.7",
     "rimraf": "^2.6.2",

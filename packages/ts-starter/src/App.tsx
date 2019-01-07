@@ -21,6 +21,7 @@ class App extends Component<IAppProps> {
     /* tslint:disable:max-line-length */
     const allowedUrl =
       '*.google-analytics.com *.googleapis.com *.googletagmanager.com *.doubleclick.net *.google.com *.facebook.net *.facebook.com';
+    // TODO: adding cloud url
     return (
       <>
         {/* Meta tag setups */}

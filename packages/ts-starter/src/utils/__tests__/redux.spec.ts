@@ -13,16 +13,16 @@ describe('redux.ts suites', () => {
   describe('asyncDispatcher', () => {
     test('should call dispatch when promise resolved', async () => {
       const success = jest.fn();
-      await asyncDispatcher(p => Promise.resolve(p))(
+      await asyncDispatcher((p: any) => Promise.resolve(p))(
         createAsyncAction('TEST1'),
       )(1)({ dispatch: success } as any);
       expect(success).toBeCalled();
     });
     test('should call dispatch when promise rejected', async () => {
       const failure = jest.fn();
-      await asyncDispatcher(p => Promise.reject(p))(createAsyncAction('TEST2'))(
-        1,
-      )({ dispatch: failure } as any);
+      await asyncDispatcher((p: any) => Promise.reject(p))(
+        createAsyncAction('TEST2'),
+      )(1)({ dispatch: failure } as any);
       expect(failure).toBeCalled();
     });
   });
