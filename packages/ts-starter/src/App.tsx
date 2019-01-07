@@ -20,8 +20,7 @@ class App extends Component<IAppProps> {
       : 'dog.ceo *.localhost/* *.income.com.sg'; // TODO: remove dog.ceo
     /* tslint:disable:max-line-length */
     const allowedUrl =
-      '*.google-analytics.com *.googleapis.com *.googletagmanager.com *.doubleclick.net *.google.com *.facebook.net *.facebook.com';
-    // TODO: adding cloud url
+      '*.kenticocloud.com *.google-analytics.com *.googleapis.com *.googletagmanager.com *.doubleclick.net *.google.com *.facebook.net *.facebook.com';
     return (
       <>
         {/* Meta tag setups */}

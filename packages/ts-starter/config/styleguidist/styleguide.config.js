@@ -1,13 +1,25 @@
 const paths = require('../webpack/paths');
-// const ignoreComponents = names => names.map(n => `**/${n}/**.tsx`)
+const common = require('../webpack/webpack.common');
+const ignoreComponents = names => names.map(n => `**/${n}/**.tsx`);
 
 module.exports = {
-  webpackConfig: require('../webpack/webpack.dev'),
-  components: '../../src/components/**/*.tsx',
   title: 'NTUC Income UP',
+  webpackConfig: {
+    resolve: {
+      ...common.resolve(),
+    },
+    module: {
+      rules: common.loaders(),
+    },
+  },
+  serverPort: 4040,
+  propsParser: require('react-docgen-typescript').withCustomConfig(
+    paths.root('tsconfig.json'),
+  ).parse,
+  components: '../../src/components/**/[A-Z]*.tsx',
   styleguideDir: paths.dist,
-  // ignore: ignoreComponents([]),
-  // styleguideComponents: {
-  //   Wrapper: paths.src('utils/styleguide/Wrapper.tsx'),
-  // },
+  ignore: ignoreComponents([]),
+  styleguideComponents: {
+    Wrapper: paths.src('utils/styleguide/ThemeWrapper.tsx'),
+  },
 };

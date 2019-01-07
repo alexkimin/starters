@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 // plugins
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -141,7 +140,6 @@ const pluginConfig = env => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     new SimpleProgressPlugin(),
-    new ErrorOverlayPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV,
       BROWSER_CACHE_DISABLED: CONFIG.BROWSER_CACHE_DISABLED,

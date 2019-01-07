@@ -1,7 +1,7 @@
 /**
  * Example Component with Typescript + styled-component wrapping
  */
-// import React, { Component } from 'react';
+import React from 'react';
 import { styled, acceleration } from '@Styled';
 
 interface IExampleCompProps extends IDs {
@@ -10,22 +10,22 @@ interface IExampleCompProps extends IDs {
 }
 
 // as a styled-component
-const ExampleComp = styled('button')<IExampleCompProps>`
+const Normal = styled('button')<IExampleCompProps>`
   ${acceleration}
   display: flex;
   width: 100px;
   color: ${({ color }) => color};
 `;
 
-ExampleComp.defaultProps = {
+Normal.defaultProps = {
   onClick: () => {},
 };
 
-export default ExampleComp;
+export default (props: IExampleCompProps) => <Normal {...props} />;
 
 // as a class
 
-// class Example extends Component<IExampleCompProps> {
+// class Normal extends Component<IExampleCompProps> {
 //   static defaultProps = {
 //     onClick: () => {},
 //   };
@@ -38,4 +38,4 @@ export default ExampleComp;
 //     );
 //   }
 // }
-// export default Example;
+// export default Normal;

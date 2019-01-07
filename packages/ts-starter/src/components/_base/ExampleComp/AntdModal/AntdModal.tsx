@@ -15,9 +15,9 @@ interface TModalProps extends ModalFuncProps, IDs {
 // need to destruct to pass only valid props to ant component
 const pickAntProps = ({ color, ...rest }: TModalProps) => <Modal {...rest} />;
 
-const ExampleComp = styled(pickAntProps)<TModalProps>`
+const AntModal = styled(pickAntProps)<TModalProps>`
   ${acceleration}
 `;
-ExampleComp.defaultProps = {};
+AntModal.defaultProps = {};
 
-export default ExampleComp;
+export default (props: TModalProps) => <AntModal {...props} />;

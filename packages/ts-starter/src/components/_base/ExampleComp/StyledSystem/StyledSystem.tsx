@@ -30,7 +30,7 @@ const Example = styled('button')<IExampleCompProps>`
   ${color}
 `;
 
-class ExampleComp extends Component<IExampleCompProps> {
+class StyledSystem extends Component<IExampleCompProps> {
   static defaultProps = {
     color: 'red',
   };
@@ -45,4 +45,5 @@ class ExampleComp extends Component<IExampleCompProps> {
   }
 }
 
-export default ExampleComp;
+/** @component */
+export default StyledSystem;

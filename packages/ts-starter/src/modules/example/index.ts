@@ -1,2 +1,2 @@
-export { default } from './duck';
-export * from './duck';
+export { default } from './example';
+export * from './example';

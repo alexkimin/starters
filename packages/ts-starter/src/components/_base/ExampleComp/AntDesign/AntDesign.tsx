@@ -8,20 +8,19 @@ import 'antd/es/button/style/index.css';
 // TYPES
 import { NativeButtonProps } from 'antd/es/button/button';
 
-type TButtonProps = NativeButtonProps &
-  IDs & {
-    color: string;
-    test: string;
-  };
+interface IButtonProps extends IDs, NativeButtonProps {
+  color: string;
+  test: string;
+}
 
 // need to destruct to pass only valid props to ant component
-const pickAntProps = ({ color, test, ...rest }: TButtonProps) => (
+const pickAntProps = ({ color, test, ...rest }: IButtonProps) => (
   <Button {...rest} />
 );
 
-const ExampleComp = styled(pickAntProps)<TButtonProps>`
+const AntDesign = styled(pickAntProps)<IButtonProps>`
   ${acceleration}
   color: ${({ color }) => color} !important;
 `;
 
-export default ExampleComp;
+export default (props: IButtonProps) => <AntDesign {...props} />;
