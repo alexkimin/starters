@@ -22,7 +22,7 @@ module.exports = e => ({
       chalk.cyan('Starting the development server...\n'),
       '\n',
       chalk.inverse('\n ENV STATUS '),
-      chalk.white(`ENV: ${e.NODE_ENV}, SERVER: ${e.SERVER_ENV}\n`),
+      chalk.white(`ENV: ${process.env.NODE_ENV}, SERVER: ${e.SERVER_ENV}\n`),
       '\n',
     );
   },

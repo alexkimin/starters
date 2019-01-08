@@ -33,9 +33,8 @@ const loaderConfig = env => {
     // loading script files
     {
       test: /\.(js|ts|tsx)$/,
-      exclude: /node_modules/,
+      exclude: [/node_modules/, /src\/assets\/js/],
       use: [
-        'thread-loader',
         {
           loader: 'babel-loader',
           options: {
@@ -86,11 +85,11 @@ const loaderConfig = env => {
     // loading css files
     {
       test: /\.css$/,
-      include: [/antd/],
+      include: [/antd\/es/],
       use: [
         prodMode ? MiniCssExtractPlugin.loader : 'style-loader',
         'css-loader',
-        {
+        prodMode && {
           loader: 'postcss-loader',
           options: {
             ident: 'postcss',
@@ -105,20 +104,23 @@ const loaderConfig = env => {
             ],
           },
         },
-      ],
+      ].filter(Boolean),
       sideEffects: true,
     },
     // loading images
     {
       test: /\.(jpg|png|gif|ico|bmp|svg)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: `assets/images/[name]${prodMode ? '.[hash:8]' : ''}.[ext]`,
-          fallback: 'file-loader',
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: `assets/images/[name]${prodMode ? '.[hash:8]' : ''}.[ext]`,
+            fallback: 'file-loader',
+          },
         },
-      },
+        prodMode && 'image-webpack-loader',
+      ].filter(Boolean),
     },
     // loading fonts
     {
@@ -136,7 +138,7 @@ const loaderConfig = env => {
 /**
  * plugins
  */
-const pluginConfig = env => {
+const pluginConfig = (env = {}) => {
   const prodMode = process.env.NODE_ENV === 'production';
   return [
     new SimpleProgressPlugin(),
@@ -177,13 +179,8 @@ const pluginConfig = env => {
     new CaseSensitivePathsPlugin(),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
-      watch: [
-        paths.src('components'),
-        paths.src('pages'),
-        paths.src('modules'),
-        paths.src('utils'),
-      ],
-      async: true,
+      watch: [paths.src()],
+      async: false,
       tslint: paths.root('tslint.json'),
       tsconfig: paths.root('tsconfig.json'),
     }),

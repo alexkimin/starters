@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
 // PAGES
-import Example from '@Pages/Example';
-import Help from '@Pages/Help';
+import Error from '@Pages/Error';
 // ASSETS
 import favicon from '@Images/icons/favicon.ico';
 // CONFIG
@@ -26,7 +25,8 @@ class App extends Component<IAppProps> {
         {/* Meta tag setups */}
         <Helmet>
           {/* Icons */}
-          <link rel="shortcut icon" type="image/icon" href={favicon} />
+          <link rel="icon" href="data:," />
+          <link rel="shortcut icon" type="image/x-icon" href={favicon} />
           {/* web app config (if necessary) */}
           {/* check: https://developers.google.com/web/fundamentals/native-hardware/fullscreen/ */}
           {/* check: https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/ */}
@@ -59,9 +59,7 @@ class App extends Component<IAppProps> {
         <GlobalStyle />
         {/* App Routes */}
         <Switch>
-          <Route exact path="/example/:id" component={Example} />
-          <Route exact path="/help" component={Help} />
-          <Route path="*" component={Help} />
+          <Route path="*" component={Error} />
         </Switch>
       </>
     );

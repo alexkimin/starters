@@ -22,20 +22,3 @@ Normal.defaultProps = {
 };
 
 export default withStyleGuide<IExampleCompProps>(Normal);
-
-// as a class
-
-// class Normal extends Component<IExampleCompProps> {
-//   static defaultProps = {
-//     onClick: () => {},
-//   };
-//   render() {
-//     const { onClick, ...rest } = this.props;
-//     return (
-//       <div onClick={onClick}>
-//         <ExampleComp {...rest} />
-//       </div>
-//     );
-//   }
-// }
-// export default Normal;

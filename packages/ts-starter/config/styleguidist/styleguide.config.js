@@ -7,6 +7,7 @@ module.exports = {
   webpackConfig: {
     resolve: {
       ...common.resolve(),
+      symlinks: false,
     },
     module: {
       rules: common.loaders(),

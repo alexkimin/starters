@@ -19,7 +19,7 @@ const paths = require('./paths');
 
 const prodLoaderConfig = e => [...common.loaders(e)];
 
-const prodPluginConfig = e =>
+const prodPluginConfig = (e = {}) =>
   [
     ...common.plugins(e),
     new webpack.HashedModuleIdsPlugin(),
@@ -35,10 +35,10 @@ const prodPluginConfig = e =>
         global: false,
       },
     }),
-    e &&
-      e.analysis &&
+    e.analysis &&
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
+        defaultSizes: 'gzip',
         reportFilename: './stats-analyzer.html',
         openAnalyzer: true,
       }),

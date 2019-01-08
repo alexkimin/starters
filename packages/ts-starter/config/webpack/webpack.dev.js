@@ -57,7 +57,7 @@ module.exports = env => ({
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
     publicPath: paths.devBase,
-    pathinfo: true,
+    pathinfo: false,
     globalObject: 'this',
   },
   module: {
@@ -67,6 +67,10 @@ module.exports = env => ({
   plugins: devPluginConfig(env),
   resolve: {
     ...common.resolve(env),
+    symlinks: false,
   },
   devServer: devServer(env),
+  watchOptions: {
+    ignored: /node_modules/,
+  },
 });

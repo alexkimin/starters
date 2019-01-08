@@ -2,34 +2,39 @@
 This readme file is written for developers. Please check [Jira](https://projectirene.atlassian.net/secure/RapidBoard.jspa?rapidView=22&view=planning.nodetail) and [Confluence](https://projectirene.atlassian.net/wiki/spaces/UP/pages/835125303/Unified+Portal+1.0) for any project details.
 
 ---
+
 ## Index
 
 - [DEV Environment Setup](#dev-environment-setup)
 - [Get Started](#get-started)
 - [Testing and Build](#testing-and-build)
 - [Architecture Design](#architecture-design)
-- [Folder Structure, Definitions and Convensions](#folder-structure,-definitions-and-convensions)
+- [Folder Structure, Definitions and Convensions](#folder-structure-definitions-and-convensions)
+- [Code and Style Tip and Example](#code-and-style-tip-and-example)
 - [Sitemap](#Sitemap)
 - [Configs](#configs)
 - [Managing Dependencies](#managing-dependencies)
 - [API Versioning](#api-versioning)
-<br>
-<br>
+  <br>
+  <br>
 
 ---
 
 ## DEV Environment Setup
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 ### 1. Env (important)
 
-- NODE - 8.12.0 (LTS)
+- NODE - 10.15.0 (LTS)
 
 checking node version `node --version`
 
 if you installed [nvm](https://github.com/creationix/nvm),
 
-`nvm install 8.12.0` and then, `nvm use 8.12.0`
+`nvm install --lts` or `nvm install 10.15.0`.
+
+If already installed, `nvm use 10.15.0`
 
 ### 2. Linting
 
@@ -68,9 +73,13 @@ then, run above npm script again.
 }
 ```
 
+  <br>
+  <br>
+
 ---
 
 ## Get Started
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 Start dev server with local api
@@ -96,6 +105,7 @@ npm run start:comp
 ---
 
 ## Testing and Build
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 Testing scripts
@@ -137,9 +147,13 @@ npm run build:ba
 npm run build:comp
 ```
 
+  <br>
+  <br>
+
 ---
 
 ## Architecture Design
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 ![](./misc/redux.png)
@@ -148,14 +162,18 @@ npm run build:comp
 - Middlewares must handle side-effect.
   - most of the simple operation: use thunk
   - if any complex handling: use saga or observable
-- Business-related state will be stored in the redux store(Singleton)
+- Business-related state will be stored in the redux store
 - Presentational state will be handled in component level.
 - Any persist state during a session, must be stored in SessionStorage
 - Any persist state for long term storing, will be stored in LocalStorage or else.
 
+  <br>
+  <br>
+
 ---
 
 ## Folder Structure, Definitions and Convensions
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 ### Folder Structure
@@ -199,39 +217,58 @@ npm run build:comp
     ...
   ...
 ```
-* component
-  * UI component from atom to template level
-* page
-  * full layout with several components
-  * redux connected
-  * consumed by top-level routes layer
-  * may have page specific operations that handling part of business logic
-* modules
-  * feature based redux stuffs
-  * business logic
-* service
-  * function/class that holds configuration and methods as a global handler
-  * e.g. interceptor, error ...
+
+- component
+  - UI component from atom to template level
+- page
+  - full layout with several components
+  - redux connected
+  - consumed by top-level routes layer
+  - may have page specific operations that handling part of business logic
+- modules
+  - feature based redux stuffs
+  - business logic
+- service
+  - function/class that holds configuration and methods as a global handler
+  - e.g. interceptor, error ...
 
 Convension
 
-* js/ts files: camelCase
-* assets files: hyphen-allowed (kebab-case)
-* constants: SNAKE_CASE
-* internal file/variables: _startWithUnderscore.js / `const _interal = 'hello'`
+- js/ts files: camelCase
+- assets files: hyphen-allowed (kebab-case)
+- constants: SNAKE_CASE
+- internal file/variables: \_startWithUnderscore.js / `const _interal = 'hello'`
+
+  <br>
+  <br>
 
 ---
 
+## Code and Style Tip and Example
+
+### 1. Typescript
+
+### 2. Style
+
+  <br>
+  <br>
+---
+
 ## Sitemap
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 Please check [Confluence](https://projectirene.atlassian.net/wiki/spaces/UP/pages/835125303/Unified+Portal+1.0)
 
-![](./misc/sitemap.png)
+![](./misc/Sitemap.png)
+
+  <br>
+  <br>
 
 ---
 
 ## Configs
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 ### Overal Config
@@ -275,18 +312,29 @@ The path will be resolved to jest `moduleNameMapper` and webpack `resolve.alias`
 
 Now you can import sth like `import { Button } from '@component/Button';`
 
+  <br>
+  <br>
+
 ---
 
 ## Managing Dependencies
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
 Once you add a new npm module, please removing carets `^` to lock the version of the module. It will prevent unwanted update via `npm install` that may make a trouble even the update of the module was a minor patch.
 
 If you want to check possible update of modules, try `npm outdated`. And install the specific version of modules via `npm i [-D] moduleName@1.1.1` after checking the release note, not via `npm update`.
 
+  <br>
+  <br>
+
 ---
 
 ## API Versioning
+
 <a href="#top" style="float: right;" >Back to top</a><br>
 
-If CI doesn't provide evn variables for the version, please update manually `./config/config.js`.
+If CI doesn't provide env variables for the version, please update manually `./config/config.js`.
+
+  <br>
+  <br>
