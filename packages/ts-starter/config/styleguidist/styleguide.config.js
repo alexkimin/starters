@@ -12,7 +12,6 @@ module.exports = {
       rules: common.loaders(),
     },
   },
-  serverPort: 4040,
   propsParser: require('react-docgen-typescript').withCustomConfig(
     paths.root('tsconfig.json'),
   ).parse,
@@ -20,6 +19,6 @@ module.exports = {
   styleguideDir: paths.dist('styleguide'),
   ignore: ignoreComponents([]),
   styleguideComponents: {
-    Wrapper: paths.src('utils/styleguide/ThemeWrapper.tsx'),
+    Wrapper: paths.src('styled/ThemeWrapper.tsx'),
   },
 };

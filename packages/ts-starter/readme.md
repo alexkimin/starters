@@ -1,20 +1,32 @@
 ## Index
 
-[DEV environment setup](#dev-environment-setup)
+[DEV Environment Setup](#dev-environment-setup)
 
 [Get Started](#get-started)
 
 [Testing and Build](#testing-and-build)
 
-[Relative path import resolve config](#relative-path-import-resolve-config)
+[Relative path resolve config](#relative-path-resolve-config)
+
+[Architecture design](#architecture-design)
+
+[Todos](#todos)
+
+[Todos](#todos)
 
 ---
 
-## DEV environment setup
+## DEV Environment Setup
 
-### Env
+### Env (important)
 
-- NDOE - 8.12.0 (LTS)
+- NODE - 8.12.0 (LTS)
+
+chekcing node version `node --version`
+
+if you installed [nvm](https://github.com/creationix/nvm),
+
+`nvm install 8.12.0` and then, `nvm use 8.12.0`
 
 ### Linting
 
@@ -30,7 +42,15 @@ will be excuted as pre-commit hook.
 
 `npm run install:ext`
 
-and reload vscode (press F1 -> reload window)
+and reload vscode (press F1 -> reload window).
+
+[trouble shooting]
+
+If you faced error that 'code command not found',
+
+press F1 -> Shell Command: install 'code' command in PATH
+
+then, excute above npm script again.
 
 #### 2. setup workspace settings
 
@@ -46,6 +66,7 @@ and reload vscode (press F1 -> reload window)
 ```
 
 ---
+
 ## Get Started
 
 Start dev server with local api
@@ -62,7 +83,14 @@ npm run start:sit
 npm run start:uat
 ```
 
+Start component dev server (styleguidist, default port: 4040)
+
+```
+npm run start:comp
+```
+
 ---
+
 ## Testing and Build
 
 Testing scripts
@@ -80,6 +108,7 @@ npm run test:cov
 // opening the coverage report
 npm run test:open
 ```
+
 Cache clear scripts
 
 ```
@@ -87,6 +116,7 @@ npm run clean
 ```
 
 Build scripts
+
 ```
 // build with testing
 npm run build
@@ -96,9 +126,14 @@ npm run build:only
 
 // build with bundle analysis
 npm run build:ba
+
+// build component catalogue (styleguidist)
+npm run build:comp
 ```
+
 ---
-## Relative path import resolve config
+
+## Relative path resolve config
 
 `./tsconfig.json`
 

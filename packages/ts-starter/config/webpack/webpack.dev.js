@@ -17,9 +17,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const devLoaderConfig = e => [...common.loaders(e)];
 
 const devPluginConfig = e => {
-  const PORT = process.env.COMP_DEV
-    ? require('../styleguidist/styleguide.config').serverPort
-    : CONFIG.DEV_SERVER_PORT;
+  const PORT = CONFIG.DEV_SERVER_PORT;
   return [
     ...common.plugins(e),
     new ErrorOverlayPlugin(),
