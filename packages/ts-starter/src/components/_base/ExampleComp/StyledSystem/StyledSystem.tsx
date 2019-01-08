@@ -45,5 +45,5 @@ class StyledSystem extends Component<IExampleCompProps> {
   }
 }
 
-/** @component */
+// if the component is not styled-component, no need withStyleGuide
 export default StyledSystem;

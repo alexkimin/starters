@@ -2,7 +2,7 @@
  * Example Component with Ant Design and Typescript + styled-component wrapping
  */
 import React from 'react';
-import { styled, acceleration } from '@Styled';
+import { styled, withStyleGuide, acceleration } from '@Styled';
 import { Button } from 'antd';
 import 'antd/es/button/style/index.css';
 // TYPES
@@ -23,4 +23,4 @@ const AntDesign = styled(pickAntProps)<IButtonProps>`
   color: ${({ color }) => color} !important;
 `;
 
-export default (props: IButtonProps) => <AntDesign {...props} />;
+export default withStyleGuide<IButtonProps>(AntDesign);

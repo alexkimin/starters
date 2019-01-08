@@ -17,7 +17,7 @@ module.exports = {
     paths.root('tsconfig.json'),
   ).parse,
   components: '../../src/components/**/[A-Z]*.tsx',
-  styleguideDir: paths.dist,
+  styleguideDir: paths.dist('styleguide'),
   ignore: ignoreComponents([]),
   styleguideComponents: {
     Wrapper: paths.src('utils/styleguide/ThemeWrapper.tsx'),

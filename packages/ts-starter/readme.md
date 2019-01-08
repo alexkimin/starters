@@ -1,30 +1,30 @@
 ## Index
 
-[1. DEV environment setup](#1.-dev-environment-setup)
+[DEV environment setup](#dev-environment-setup)
 
-[3. Relative path import resolve config](#3.-relative-path import-resolve-config)
+[Get Started](#get-started)
 
-## 1. DEV environment setup
+[Testing and Build](#testing-and-build)
+
+[Relative path import resolve config](#relative-path-import-resolve-config)
 
 ---
 
-### env
+## DEV environment setup
+
+### Env
 
 - NDOE - 8.12.0 (LTS)
 
----
-
 ### Linting
 
-will be excuted as pre-commit hook
+will be excuted as pre-commit hook.
 
 - tslint: airbnb
 - prettier: airbnb
 - stylelint: airbnb
 
----
-
-### vscode
+### vscode settings
 
 #### 1. install recommended extensions
 
@@ -47,7 +47,25 @@ and reload vscode (press F1 -> reload window)
 
 ---
 
-## 3. Relative path import resolve config
+## Get Started
+
+Start dev server with local api
+
+```
+npm start
+npm run start
+```
+
+Start dev server with deployed api (sit/uat)
+
+```
+npm run start:sit
+npm run start:uat
+```
+
+---
+
+## Relative path import resolve config
 
 `./tsconfig.json`
 
@@ -63,8 +81,6 @@ and reload vscode (press F1 -> reload window)
 }
 ```
 
-The path will be resolved to jest `moduleNameMapper` and webpack `resolve.alias`. please check the file if you want to know current path configs.
+The path will be resolved to jest `moduleNameMapper` and webpack `resolve.alias`. please check the config file if you want to know current path configs.
 
 Now you can import sth like `import { Button } from '@component/Button';`
-
----

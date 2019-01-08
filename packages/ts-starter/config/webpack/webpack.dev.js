@@ -55,7 +55,7 @@ module.exports = env => ({
     app: ['@babel/polyfill', paths.entry],
   },
   output: {
-    path: paths.dist,
+    path: paths.dist(),
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
     publicPath: paths.devBase,

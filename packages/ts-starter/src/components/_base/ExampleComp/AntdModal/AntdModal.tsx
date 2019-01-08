@@ -2,22 +2,22 @@
  * Example BlueprintJS Component with Typescript + styled-component wrapping
  */
 import React from 'react';
-import { styled, acceleration } from '@Styled';
+import { styled, withStyleGuide, acceleration } from '@Styled';
 import { Modal } from 'antd';
 import 'antd/es/modal/style/index.css';
 // TYPES
 import { ModalFuncProps } from 'antd/es/modal/modal';
 
-interface TModalProps extends ModalFuncProps, IDs {
+interface IModalProps extends ModalFuncProps, IDs {
   color?: string;
 }
 
 // need to destruct to pass only valid props to ant component
-const pickAntProps = ({ color, ...rest }: TModalProps) => <Modal {...rest} />;
+const pickAntProps = ({ color, ...rest }: IModalProps) => <Modal {...rest} />;
 
-const AntModal = styled(pickAntProps)<TModalProps>`
+const AntModal = styled(pickAntProps)<IModalProps>`
   ${acceleration}
 `;
 AntModal.defaultProps = {};
 
-export default (props: TModalProps) => <AntModal {...props} />;
+export default withStyleGuide<IModalProps>(AntModal);

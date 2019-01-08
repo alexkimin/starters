@@ -1,8 +1,8 @@
 /**
  * Example Component with Typescript + styled-component wrapping
  */
-import React from 'react';
-import { styled, acceleration } from '@Styled';
+// import React from 'react';
+import { styled, withStyleGuide, acceleration } from '@Styled';
 
 interface IExampleCompProps extends IDs {
   onClick?: (s: any) => any;
@@ -21,7 +21,7 @@ Normal.defaultProps = {
   onClick: () => {},
 };
 
-export default (props: IExampleCompProps) => <Normal {...props} />;
+export default withStyleGuide<IExampleCompProps>(Normal);
 
 // as a class
 

@@ -24,7 +24,7 @@ import _ from 'lodash';
 export interface IExampleProps extends RouteComponentProps<{ id?: string }> {
   push: Push;
   goBack: GoBack;
-  getDogsApi: any;
+  getDogs: any;
 }
 
 const normalJSFn = (props: any) => console.log(props);
@@ -50,7 +50,7 @@ class Example extends Component<IExampleProps, any> {
   componentDidMount() {
     // normal JS coding is okay
     normalJSFn('hello JS');
-    this.props.getDogsApi({
+    this.props.getDogs({
       name: 'bong',
     });
   }
