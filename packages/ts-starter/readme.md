@@ -46,7 +46,6 @@ and reload vscode (press F1 -> reload window)
 ```
 
 ---
-
 ## Get Started
 
 Start dev server with local api
@@ -64,7 +63,41 @@ npm run start:uat
 ```
 
 ---
+## Testing and Build
 
+Testing scripts
+
+```
+// running 1 time jest unit testing
+npm run test
+
+// watch mode
+npm run test:watch
+
+// generating coverage
+npm run test:cov
+
+// opening the coverage report
+npm run test:open
+```
+Cache clear scripts
+
+```
+npm run clean
+```
+
+Build scripts
+```
+// build with testing
+npm run build
+
+// build without testing
+npm run build:only
+
+// build with bundle analysis
+npm run build:ba
+```
+---
 ## Relative path import resolve config
 
 `./tsconfig.json`
