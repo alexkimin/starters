@@ -1,15 +1,37 @@
 import { createGlobalStyle, css } from '@Styled';
 
 const fontFaces = css`
+  /* Montserrat Family */
   @font-face {
-    font-family: 'Open Sans';
-    src: url('./assets/fonts/OpenSans/OpenSans-Regular.ttf') format('ttf');
+    font-family: 'Montserrat Bold';
+    src: url('./assets/fonts/Montserrat/Montserrat-Bold.ttf') format('ttf');
+  }
+
+  /* Muli Family */
+  @font-face {
+    font-family: 'Muli Bold';
+    src: url('./assets/fonts/Muli/Muli-Bold.ttf') format('ttf');
+  }
+
+  /* Poppins Family */
+  @font-face {
+    font-family: 'Poppins Regular';
+    src: url('./assets/fonts/Poppins/Poppins-Regular.ttf') format('ttf');
+  }
+  @font-face {
+    font-family: 'Poppins SemiBold';
+    src: url('./assets/fonts/Poppins/Poppins-SemiBold.ttf') format('ttf');
   }
 `;
 
 export const GlobalStyle = createGlobalStyle`
 
   ${fontFaces}
+
+  @font-face {
+    font-family: 'Muli Bold';
+    src: url('./assets/fonts/Muli/Muli-Bold.ttf') format('ttf');
+  }
 
   /* Normalize - MiniReset.css */
   html,body,p,ol,ul,li,dl,dt,dd,blockquote,

@@ -13,6 +13,8 @@ const Normal = styled('button')<IExampleCompProps>`
   width: 100px;
   text-align: center;
   color: ${({ color }) => color};
+  font-size: 20px;
+  font-family: 'Muli Bold Helvetica';
 `;
 
 Normal.defaultProps = {
