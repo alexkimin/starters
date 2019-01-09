@@ -28,11 +28,6 @@ export const GlobalStyle = createGlobalStyle`
 
   ${fontFaces}
 
-  @font-face {
-    font-family: 'Muli Bold';
-    src: url('./assets/fonts/Muli/Muli-Bold.ttf') format('ttf');
-  }
-
   /* Normalize - MiniReset.css */
   html,body,p,ol,ul,li,dl,dt,dd,blockquote,
   figure,fieldset,legend,textarea,pre,iframe,

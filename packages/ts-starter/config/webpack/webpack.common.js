@@ -158,6 +158,7 @@ const pluginConfig = (env = {}) => {
       BASE_DEV: CONFIG.BASE_DEV,
       BASE_PROD: CONFIG.BASE_PROD,
       API_ENDPOINT: CONFIG.API_URL(env.SERVER_ENV),
+      API_VERSION: CONFIG.API_VERSION,
     }),
     new CopyWebpackPlugin([{ from: './src/assets/js', to: './assets/js' }]),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

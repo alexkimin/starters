@@ -16,7 +16,7 @@ class App extends Component<IAppProps> {
     const devServer = isProdEnv ? '' : "'unsafe-eval'";
     const hostUrl = isProdEnv
       ? '*.income.com.sg'
-      : 'dog.ceo *.localhost/* *.income.com.sg'; // TODO: remove dog.ceo
+      : '*.localhost/* *.income.com.sg';
     /* tslint:disable:max-line-length */
     const allowedUrl =
       '*.kenticocloud.com *.google-analytics.com *.googleapis.com *.googletagmanager.com *.doubleclick.net *.google.com *.facebook.net *.facebook.com';
