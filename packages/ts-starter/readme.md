@@ -11,6 +11,8 @@ This readme file is written for developers. Please check [Jira](https://projecti
 - [Architecture Design](#architecture-design)
 - [Folder Structure, Definitions and Convensions](#folder-structure-definitions-and-convensions)
 - [Code and Style Tip and Example](#code-and-style-tip-and-example)
+  - [1. Typescript](#1.-typescript)
+  - [2. Style](#2.-style)
 - [Sitemap](#Sitemap)
 - [Configs](#configs)
 - [Managing Dependencies](#managing-dependencies)
@@ -247,11 +249,15 @@ Convension
 
 ## Code and Style Tip and Example
 
+<a href="#top" style="float: right;" >Back to top</a><br>
+
 ### 1. Typescript
+
+<a href="#top" style="float: right;" >Back to top</a><br>
 
 This project is using [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) as a static typing just like [Flow](https://github.com/facebook/flow). But comparing with Flow, Typescript has more advantages with vscode, has very similar syntax and verboseness with Flow. The advantage of Flow is easy to adopt in the middle of any project, but eventually, you will need to touch all files to get a good quality of static typing support.
 
-But we are not using Typescript to force someone to follow OOP style coding, only for replacing [prop-types](https://github.com/facebook/prop-types) to achieve code safety in compile stage, not runtime stage. And this time of experience will be extended to enterprise level Angular or contributing open source project written in Typescript.
+But we are not using Typescript to force someone to follow OOP style coding, only for replacing [prop-types](https://github.com/facebook/prop-types) to achieve code safety in compile stage, not runtime stage. And this kind of experience can be an opportunity to extend your interest on enterprise level Angular or contributing open source project written in Typescript.
 
 Below example means, function `fn` will accept `any` type of argument, will return `any` type of result. The `any` is a wildcard, it will be a good starting point.
 
@@ -278,7 +284,7 @@ const fn2 = (...args: (number | string)[]): string =>
   args.reduce((a, c) => a + c.toString(), '');
 ```
 
-In react, there are more types and it may confused. Please refer this [cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet) when you need React types.
+In react, there are more types and it may confused. Please refer this [cheatsheet](https://github.com/piotrwitek/react-redux-typescript-guide) when you need React types.
 
 In general, React component with typescript will look like below.
 
@@ -323,7 +329,7 @@ export interface IExampleProps {
 }
 ```
 
-And there is [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) that allow pass type argument to create resuable components or functions.
+And there is [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) that allow passing type arguments to create reusable components or functions.
 
 ```ts
 // generic type P will be assigned to props
@@ -337,7 +343,80 @@ interface IHomeProps {
 withHoc<IHomeProps>(Home)
 ```
 
+For more information, please check those.
+
+- https://github.com/piotrwitek/react-redux-typescript-guide
+- https://github.com/sw-yx/react-typescript-cheatsheet
+
 ### 2. Style
+
+<a href="#top" style="float: right;" >Back to top</a><br>
+
+This project is using [styled-components](https://github.com/styled-components/styled-components) that the most famous one in CSS-in-JS. You will need to install vscode extension to see css syntax highlighting. (`npm run install:ext`)
+
+But if you really don't want to use that, can import `css` file into your component file.
+
+Because of Typescript, you need to import `styled` from `@Styled`, not from `styled-components`
+
+```ts
+import { styled, withStyleGuide } from '@Styled';
+
+export interface IStyledComponent {
+  id?: string;
+  color?: string;
+}
+
+// the first argument will be the props, it may have a theme object.
+const StyledComponent = styled('div')<IStyledComponent>`
+  display: flex;
+  color: ${({ color }) => color || 'green'};
+`;
+
+export default withStyleGuide<IStyledComponent>(StyledComponent);
+```
+
+`withStyleGuide` is a helper to register into `Styleguidist`. You will need `withStyleGuide` only for typescript styled-component.
+
+Ans `styled-components` also can customize existing classes and tag base css.
+
+```js
+import { styled, withStyleGuide } from '@Styled';
+
+export interface IStyledComponent {
+  id?: string;
+  color?: string;
+}
+
+// the first argument will be the props, it may have a theme object.
+const StyledComponent =
+  styled('div') <
+  IStyledComponent >
+  `
+  display: flex;
+  color: ${({ color }) => color || 'green'};
+
+  /* class */
+  .ui-framwork-class {
+    font-size: 1.5rem;
+  }
+
+  /* tag */
+  div {
+    color: red;
+  }
+
+  /* forcing values (just like !important) */
+  .ui-framwork-class {
+    &&& {
+      font-size: 1.5rem;
+    }
+    // also can
+    color: blue !important;
+  }
+`;
+
+export default withStyleGuide < IStyledComponent > StyledComponent;
+```
 
   <br>
   <br>
