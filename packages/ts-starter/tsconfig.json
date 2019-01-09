@@ -28,7 +28,7 @@
     "sourceMap": true,
     "target": "esnext",
     "moduleResolution": "node",
-    "allowJs": false,
+    "allowJs": true,
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,

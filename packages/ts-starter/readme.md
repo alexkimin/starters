@@ -238,6 +238,7 @@ Convension
 - assets files: hyphen-allowed (kebab-case)
 - constants: SNAKE_CASE
 - internal file/variables: \_startWithUnderscore.js / `const _interal = 'hello'`
+- typescript type interface: `IComponentNameProps`
 
   <br>
   <br>
@@ -247,6 +248,94 @@ Convension
 ## Code and Style Tip and Example
 
 ### 1. Typescript
+
+This project is using [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) as a static typing just like [Flow](https://github.com/facebook/flow). But comparing with Flow, Typescript has more advantages with vscode, has very similar syntax and verboseness with Flow. The advantage of Flow is easy to adopt in the middle of any project, but eventually, you will need to touch all files to get a good quality of static typing support.
+
+But we are not using Typescript to force someone to follow OOP style coding, only for replacing [prop-types](https://github.com/facebook/prop-types) to achieve code safety in compile stage, not runtime stage. And this time of experience will be extended to enterprise level Angular or contributing open source project written in Typescript.
+
+Below example means, function `fn` will accept `any` type of argument, will return `any` type of result. The `any` is a wildcard, it will be a good starting point.
+
+```ts
+const fn = (arg: any): any => arg.toString();
+```
+
+But once you familiar with the [basic type](https://www.typescriptlang.org/docs/handbook/basic-types.html) of typescript, please try not to use `any` as much as possible.
+
+```ts
+const fn = (arg: number): string => arg.toString();
+```
+
+There are some basic types, `boolean`, `number`, `string`, `void`, `undefined`, `null`, `object`. And if you need a type of array, then `string[]` will be an array with string element.
+
+The `|` operator mean a `or` condition, the `&` is an `and` condition.
+
+```ts
+// arg can be a number or string, the function will return string
+const fn = (arg: number | string): string => arg.toString();
+
+// args can be an array of number or string type elements, the function will return string.
+const fn2 = (...args: (number | string)[]): string =>
+  args.reduce((a, c) => a + c.toString(), '');
+```
+
+In react, there are more types and it may confused. Please refer this [cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet) when you need React types.
+
+In general, React component with typescript will look like below.
+
+```tsx
+import React, { Component } from 'react';
+
+export interface IExampleProps {
+  id?: string;
+}
+
+export interface IExampleState {
+  isExample?: boolean;
+}
+
+class Example extends Component<IExampleProps, IExampleState> {
+  render() {
+    return <div>hello React example</div>;
+  }
+}
+
+export default Example;
+```
+
+If you want optional types, `?` is the one.
+
+```ts
+export interface IExampleProps {
+  id?: string;
+}
+```
+
+But if there are so many props needed to be converted as optional, then `Partial` is the one you need.
+
+```ts
+export interface Partial<IExampleProps> {
+  id: string;
+}
+
+// same as
+export interface IExampleProps {
+  id?: string;
+}
+```
+
+And there is [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) that allow pass type argument to create resuable components or functions.
+
+```ts
+// generic type P will be assigned to props
+const withHoc = <P>(Component: React.ReactNode): any => (props: P): React.ReactNode => <Component {...props} />
+
+interface IHomeProps {
+  id?: string;
+}
+
+// usage
+withHoc<IHomeProps>(Home)
+```
 
 ### 2. Style
 

@@ -32,7 +32,7 @@ const loaderConfig = env => {
     },
     // loading script files
     {
-      test: /\.(js|ts|tsx)$/,
+      test: /\.(js|jsx|ts|tsx)$/,
       exclude: [/node_modules/, /src\/assets\/js/],
       use: [
         {
