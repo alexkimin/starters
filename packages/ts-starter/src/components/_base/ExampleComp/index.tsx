@@ -1,3 +1,3 @@
-export { default as NormalExample } from './Normal/Normal';
-export { default as StyledSystemExample } from './StyledSystem/StyledSystem';
-export { default as AntdModal } from './AntdModal/AntdModal';
+export { default as Normal } from './Normal/Normal';
+export { default as StyledSystem } from './StyledSystem/StyledSystem';
+export { default as AntdButton } from './AntdButton/AntdButton';

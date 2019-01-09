@@ -10,6 +10,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const paths = require('./paths');
 const CONFIG = require('../config');
 const resolveTsPathsToAlias = require('./resolveTsPathsToAlias');
+const antdGlobalVars = require('../../src/styled/antdGlobalVars');
 
 /**
  * loaders
@@ -63,8 +64,8 @@ const loaderConfig = env => {
                 'import',
                 {
                   libraryName: 'antd',
-                  libraryDirectory: 'es',
-                  style: 'css',
+                  // libraryDirectory: 'es',
+                  style: true,
                 },
               ],
               prodMode && [
@@ -84,8 +85,8 @@ const loaderConfig = env => {
     },
     // loading css files
     {
-      test: /\.css$/,
-      include: [/antd\/es/],
+      test: /\.less$/,
+      include: [/antd/],
       use: [
         prodMode ? MiniCssExtractPlugin.loader : 'style-loader',
         'css-loader',
@@ -102,6 +103,15 @@ const loaderConfig = env => {
                 stage: 3,
               }),
             ],
+          },
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            modifyVars: {
+              ...antdGlobalVars,
+            },
+            javascriptEnabled: true,
           },
         },
       ].filter(Boolean),
@@ -151,6 +161,10 @@ const pluginConfig = (env = {}) => {
     }),
     new CopyWebpackPlugin([{ from: './src/assets/js', to: './assets/js' }]),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.NormalModuleReplacementPlugin(
+      /node_modules\/antd\/lib\/style\/index\.less/,
+      paths.src('styled/antdWrap.less'),
+    ),
     new HtmlWebpackPlugin(
       Object.assign(
         {},

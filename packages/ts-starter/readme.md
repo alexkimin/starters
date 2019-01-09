@@ -377,7 +377,7 @@ export default withStyleGuide<IStyledComponent>(StyledComponent);
 
 `withStyleGuide` is a helper to register into `Styleguidist`. You will need `withStyleGuide` only for typescript styled-component.
 
-Ans `styled-components` also can customize existing classes and tag base css.
+Ans `styled-components` also can customize existing classes and tag base css. Please check their [Docs](https://www.styled-components.com/docs/faqs#can-i-use-css-frameworks) for more information.
 
 ```js
 import { styled, withStyleGuide } from '@Styled';

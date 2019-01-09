@@ -1,13 +1,15 @@
-import { createGlobalStyle } from '@Styled';
+import { createGlobalStyle, css } from '@Styled';
 
-// todo: depends on the antd usage, configure css properly.
-export const GlobalStyle = createGlobalStyle`
-
-  /* Fonts */
-  /* @font-face {
+const fontFaces = css`
+  @font-face {
     font-family: 'Open Sans';
     src: url('./assets/fonts/OpenSans/OpenSans-Regular.ttf') format('ttf');
-  } */
+  }
+`;
+
+export const GlobalStyle = createGlobalStyle`
+
+  ${fontFaces}
 
   /* Normalize - MiniReset.css */
   html,body,p,ol,ul,li,dl,dt,dd,blockquote,
