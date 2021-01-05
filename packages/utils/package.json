@@ -52,7 +52,7 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "redux": "^4.0.1",
     "redux-act": "^1.7.4"
   }
