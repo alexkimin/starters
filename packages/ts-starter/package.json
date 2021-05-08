@@ -65,7 +65,7 @@
     "detect-browser": "4.0.3",
     "history": "4.7.2",
     "immer": "1.10.0",
-    "lodash": "4.17.11",
+    "lodash": "4.17.21",
     "query-string": "6.2.0",
     "ramda": "0.26.1",
     "react": "16.7.0",
